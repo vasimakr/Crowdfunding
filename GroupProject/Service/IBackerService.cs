@@ -9,6 +9,7 @@ namespace Crowdfunding.Service
 {
     public interface IBackerService
     {
+        // BACKERS
         public void CreateBacker(Backer backer);
 
         public Backer ReadBacker(int id);
