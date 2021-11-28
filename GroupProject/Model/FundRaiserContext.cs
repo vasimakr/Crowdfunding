@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Crowdfunding.Model
 {
-    class FundRaiserContext
+    public class FundRaiserContext
     {
+
     }
 }
