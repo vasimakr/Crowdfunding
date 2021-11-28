@@ -10,5 +10,9 @@ namespace Crowdfunding.Model
     public class FundRaiserContext  : DbContext 
     {
         public DbSet<Backer> Backers { get; set; }
+
+        public DbSet<Creator> Creators { get; set; }
+
+
     }
 }
