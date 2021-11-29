@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Crowdfunding.Model
+
 {
     public class Backer : User
     {

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Crowdfunding.Model
 {
+
     public class FundedProject
     {
         [Key]
