@@ -16,5 +16,4 @@ namespace Crowdfunding.dto
             public string Description { get; set; }
 
         }
-    }
 }
