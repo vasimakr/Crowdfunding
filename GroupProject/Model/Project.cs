@@ -17,12 +17,11 @@ namespace Crowdfunding.Model
         public string Description { get; set; }
         public string StatusUpdate { get; set; } //List
         public Category Category { get; set; }
-        public virtual List<ProjectReward> ProjectRewards { get; set; }
+        public virtual List<FundingPackage> FundingPackages { get; set; }
         public bool IsTrending { get; set; }
         public int Fundings { get; set; }
         public int Goal { get; set; }
 
-        public virtual List<FundedProject> FundedProjects { get; set; }
 
 
         [ForeignKey("CreatorId")]

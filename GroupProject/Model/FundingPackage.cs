@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 namespace Crowdfunding.Model
 {
 
-    public class FundedProject
+    public class FundingPackage
     {
         [Key]
         public int Id { get; set; }
-        [ForeignKey("BackerId")]
-        public Backer Backer { get; set; }
-        //[InverseProperty("Backer")]
-        public virtual List<FundedProject> FundedProjects { get; set; }
-
+        [ForeignKey("ProjectId")]
+        public Project Project { get; set; }
+        public int Tier { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public string Description { get; set; }
     }
 }
