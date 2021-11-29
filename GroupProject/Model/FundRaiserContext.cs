@@ -21,7 +21,7 @@ namespace Crowdfunding.Model
             //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User =sa;Password=admin!@#123");  //works for Vasili
             //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User ID=sa;Password=admin!@#123");  //works for Ntina
             //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User ID=sa;Password=admin!@#123");  //works for Mike
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User ID=sa;Password=admin!@123");    //works for Nikita
+            //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User ID=sa;Password=admin!@123");    //works for Nikita
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
