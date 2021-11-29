@@ -22,8 +22,6 @@ namespace Crowdfunding.Model
         public int Fundings { get; set; }
         public int Goal { get; set; }
 
-
-
         [ForeignKey("CreatorId")]
         public Creator Creator { get; set; }
     }
