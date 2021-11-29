@@ -9,5 +9,7 @@ namespace Crowdfunding.Model
     public class Backer : User
     {
         public List<FundedProject> FundedProjects { get; set; }
+
+
     }
 }

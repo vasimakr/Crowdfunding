@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace Crowdfunding.Model
 {
     public class Project
     {
+        [Key]
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -18,6 +20,9 @@ namespace Crowdfunding.Model
         public bool IsTrending { get; set; }
         public int Fundings { get; set; }
         public int Goal { get; set; }
+
+        public virtual List<FundedProject> FundedProjects { get; set; }
+
 
         [ForeignKey("CreatorId")]
         public Creator Creator { get; set; }
