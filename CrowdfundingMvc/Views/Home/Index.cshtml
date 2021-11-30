@@ -2,7 +2,42 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@*<div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <div class="card card-cascade wider" style="width: 15rem;">
+
+                <div class="card-body">
+                    <h4 class="card-title"> Backer </h4>
+                    <p class="card-text">Back A Project</p>
+                    <a class="btn btn-primary" asp-area="" asp-controller="Backer" asp-action="Index">Back</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm">
+                   <div class="card card-cascade wider" style="width: 15rem;">
+              
+                <div class="card-body">
+                    <h4 class="card-title"> Creator </h4>
+                    <p class="card-text">Create A Project</p>
+                    <a class="btn btn-primary" asp-area="" asp-controller="Creator" asp-action="Index">Create</a>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
 </div>
+
+
+    
+
+
+    
