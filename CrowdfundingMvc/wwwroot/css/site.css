@@ -24,9 +24,16 @@ a {
   border-color: #1861ac;
 }
 
-/* Sticky footer styles
+.block {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #000;
+    display: block;
+    float: left;
+}
+    /* Sticky footer styles
 -------------------------------------------------- */
-html {
+    html {
   font-size: 14px;
 }
 @media (min-width: 768px) {
