@@ -24,6 +24,8 @@ namespace CrowdfundingMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IBackerService , BackerService>();
+            services.AddDbContext<FundRaiserContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
