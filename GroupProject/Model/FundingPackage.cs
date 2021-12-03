@@ -21,5 +21,6 @@ namespace Crowdfunding.Model
         public string Description { get; set; }
 
         public virtual List<BackerPackage> BackerPackages { get; set; }
+
     }
 }
