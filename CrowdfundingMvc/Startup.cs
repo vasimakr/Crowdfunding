@@ -1,3 +1,5 @@
+using Crowdfunding.Model;
+using Crowdfunding.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

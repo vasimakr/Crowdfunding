@@ -1,4 +1,6 @@
-﻿using Crowdfunding.Model;
+﻿using Crowdfunding.dto;
+using Crowdfunding.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +20,7 @@ namespace Crowdfunding.Service
                 dbContext = adbContext;
             }
 
-            public void CreateBacker(Backer backer)
+            public ApiResponse<Backer> CreateBacker(Backer backer)
             {
                 if (backer == null)
                 {
@@ -43,7 +45,7 @@ namespace Crowdfunding.Service
                 dbContext.Backers.Add(backer);
                 if (dbContext.SaveChanges() == 1)
                 {
-                    return new ApiResponse<Product>() { Data = backer, Description = "ok", StatusCode = 0 };
+                    return new ApiResponse<Backer>() { Data = backer, Description = "ok", StatusCode = 0 };
                 }
 
                 return new ApiResponse<Backer>() { Data = null, Description = "Nothing saved", StatusCode = 399 };
@@ -81,7 +83,7 @@ namespace Crowdfunding.Service
             public List<BackerPackage> GetBackerFundingPackages(int backerId)
             {
                 return dbContext
-                       .BackerPackage
+                       .BackerPackages
                        .Where(item => item.Backer.Id == backerId)
                        .Include(item => item.FundingPackage)
                        .ToList();

@@ -58,12 +58,7 @@ namespace Crowdfunding.Service
                 .ToList();
         }
 
-        public bool UpdateFunding(int projectId, int tierPrice)
-        {
-            var dbProject = dbContext.Projects.Find(projectId);
-            dbProject.Fundings += tierPrice;
-            return dbContext.SaveChanges() == 1;
-        }
+        
 
         public Project UpdateProject(int projectId, Project project)
         {

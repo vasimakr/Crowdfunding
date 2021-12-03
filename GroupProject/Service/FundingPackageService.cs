@@ -1,4 +1,5 @@
 ﻿using Crowdfunding.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Crowdfunding.Service
 {
-	public class FundingPackageService : IFundingPackageService
+    public class FundingPackageService : IFundingPackageService
     {
         private readonly FundRaiserContext dbContext;
 
@@ -25,37 +26,37 @@ namespace Crowdfunding.Service
                 return null;
             }
 
-            var fundingPackage = new FundingPackage()
-            {
-                Project = project,
-                Tier = AfundingPackage.Tier,
-                Name = AfundingPackage.Name,
-                Price = AfundingPackage.Price,
-                Description = AfundingPackage.Description
-=            };
+            //var fundingPackage = new FundingPackage
+            //{
+            //    Project = project,
+            //    Tier = aFundingPackage.Tier,
+            //    Name = aFundingPackage.Name,
+            //    Price = aFundingPackage.Price,
+            //    Description = aFundingPackage.Description
+            //};
 
-            dbContext.FundingPackage.Add(fundingPackage);
+            dbContext.FundingPackages.Add(aFundingPackage);
+            aFundingPackage.Project = project;
             dbContext.SaveChanges();
-            return fundingPackage;
+            return aFundingPackage;
         }
 
         public FundingPackage UpdateFundingPackage(int fundingPackageId, FundingPackage fundingPackage)
         {
-            var dbFundingPackage = dbContext.FundingPackage.Find(fundingPackageId);
+            var dbFundingPackage = dbContext.FundingPackages.Find(fundingPackageId);
 
             if (dbFundingPackage == null)
             {
                 return null;
             }
 
-            var fundingPackage = new FundingPackage()
-            {
-                dbFundingPackage.Project = project,
-                dbFundingPackage.Tier = fundingPackage.Tier,
-                dbFundingPackage.Name = fundingPackage.Name,
-                dbFundingPackage.Price = fundingPackage.Price,
-                dbFundingPackage.Description = fundingPackage.Description
-=            };
+
+            dbFundingPackage.Project = fundingPackage.Project;
+            dbFundingPackage.Tier = fundingPackage.Tier;
+            dbFundingPackage.Name = fundingPackage.Name;
+            dbFundingPackage.Price = fundingPackage.Price;
+            dbFundingPackage.Description = fundingPackage.Description;
+
 
             dbContext.SaveChanges();
             return dbFundingPackage;
@@ -63,24 +64,27 @@ namespace Crowdfunding.Service
 
         public BackerPackage BuyFundingPackage(int backerId, int fundingPackageId)
         {
-            var dbBacker = dbContext.Backers.Find(backerId);
-            var dbFundingPackage = dbContext.FundingPackage.Find(fundingPackageId);
+            Backer dbBacker = dbContext.Backers.Find(backerId);
+            var dbFundingPackage = dbContext.FundingPackages
+                .Where(item=> item.Id==fundingPackageId).Include(item => item.Project).First();
 
-            if (dbBacker == null || dbFundingPackage == null) return null;
-            var backerPackage = new BackerPackage()
+           
+            var backerPackage = new BackerPackage
             {
-                backer = dbBacker;
-                fundingPackage = dbFundingPackage;
-            }
+                Backer = dbBacker,
+                FundingPackage = dbFundingPackage
+            };
+            var project= dbContext.Projects.Find(dbFundingPackage.Project.Id);
+            project.Fundings += dbFundingPackage.Price;
 
-            dbContext.BackerPackage.Add(backerPackage);
+            dbContext.BackerPackages.Add(backerPackage);
             dbContext.SaveChanges();
             return backerPackage;
         }
 
         public bool DeleteFundingPackage(int fundingPackageId)
         {
-            var dbFundingPackage = dbContext.FundingPackage.Find(fundingPackageId);
+            var dbFundingPackage = dbContext.FundingPackages.Find(fundingPackageId);
             if (dbFundingPackage == null) return false;
             dbContext.Remove(dbFundingPackage);
             return dbContext.SaveChanges() == 1;
@@ -88,12 +92,12 @@ namespace Crowdfunding.Service
 
         public FundingPackage GetFundingPackage(int fundingPackageId)
         {
-            return dbContext.FundingPackage.Find(fundingPackageId);
+            return dbContext.FundingPackages.Find(fundingPackageId);
         }
 
         public List<FundingPackage> GetFundingPackage()
         {
-             return dbContext.FundingPackage.ToList();
+            return dbContext.FundingPackages.ToList();
         }
-    }
+    } 
 }

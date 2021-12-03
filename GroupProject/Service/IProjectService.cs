@@ -15,7 +15,7 @@ namespace Crowdfunding.Service
         public List<Project> ReadProject(int pageCount, int pageSize); // θα χρειαστεί για τις σελίδες browsing φαντάζομαι
         public Project UpdateProject(int projectId, Project project);
         public bool DeleteProject(int id);
-        public bool UpdateFunding(int projectId, int tierPrice);
+
 
     }
 }

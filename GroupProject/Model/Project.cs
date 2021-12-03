@@ -19,7 +19,7 @@ namespace Crowdfunding.Model
         public Category Category { get; set; }
         public virtual List<FundingPackage> FundingPackages { get; set; }
         public bool IsTrending { get; set; }
-        public int Fundings { get; set; }
+        public int Fundings { get; set; } = 0;
         public int Goal { get; set; }
 
         [ForeignKey("CreatorId")]
