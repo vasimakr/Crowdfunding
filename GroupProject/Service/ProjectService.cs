@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Crowdfunding.Service
 {
-    class ProjectService : IProjectService
+    public class ProjectService : IProjectService
     {
         private readonly FundRaiserContext dbContext;
         public ProjectService(FundRaiserContext db)

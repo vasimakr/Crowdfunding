@@ -26,7 +26,9 @@ namespace CrowdfundingMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IProjectService, ProjectService>();
             services.AddScoped<IBackerService , BackerService>();
+            services.AddScoped<ICreatorService, CreatorService>();
             services.AddScoped<IFundingPackageService , FundingPackageService>();
             services.AddDbContext<FundRaiserContext>();
         }

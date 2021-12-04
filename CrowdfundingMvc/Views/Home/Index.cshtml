@@ -1,5 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
 
 
@@ -8,8 +10,54 @@
         <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     </div>*@
 
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Home</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#projects">All Projects</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Browse by Category
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Movies</a></li>
+                        <li><a href="#">Boardgames</a></li>
+                        <li><a href="#">Applications</a></li>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Technology and Electronics</a></li>
+                        <li><a href="#">Nutrition</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
 <div class="container">
     <div class="row">
+        <!-- 8a faei delete 
+    <div class="col-sm">
+        <div class="card-body">
+            <a class="btn btn-primary" asp-area="" asp-controller="Creator" asp-action="SignIn">Sign In</a>
+        </div>
+
+
+        <div class="card-body">
+             <a class="btn btn-primary" asp-area="" asp-controller="Creator" asp-action="SignUp">Sign Up</a>
+        </div>
+                -->
         <div class="col-sm">
             <div class="card card-cascade wider" style="width: 15rem;">
 
@@ -22,22 +70,83 @@
             </div>
         </div>
         <div class="col-sm">
-                   <div class="card card-cascade wider" style="width: 15rem;">
-              
+            <div class="card card-cascade wider" style="width: 15rem;">
+
                 <div class="card-body">
                     <h4 class="card-title"> Creator </h4>
                     <p class="card-text">Create A Project</p>
                     <a class="btn btn-primary" asp-area="" asp-controller="Creator" asp-action="Index">Create</a>
                 </div>
-                
             </div>
 
         </div>
     </div>
-</div>
+    </div>
 
 
-    
+    <div class="container">
+        <h3 class="text-center">Contact</h3>
+        <p class="text-center"><em>We love our fans!</em></p>
+        <div class="row test">
+            <div class="col-md-4">
+                <p>Fan? Drop a note.</p>
+                <p><span class="glyphicon glyphicon-map-marker"></span>New York, US</p>
+                <p><span class="glyphicon glyphicon-phone"></span>Phone: +00 1515151515</p>
+                <p><span class="glyphicon glyphicon-envelope"></span>Email: mail@mail.com</p>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <button class="btn pull-right" type="submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-    
+    <style>
+        /* Add a dark background color to the footer */
+        footer {
+            background-color: #2d2d30;
+            color: #f5f5f5;
+            padding: 32px;
+        }
+
+            footer a {
+                color: #f5f5f5;
+            }
+
+                footer a:hover {
+                    color: #777;
+                    text-decoration: none;
+                }
+    </style>
+
+    <footer class="text-center">
+        <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a><br><br>
+        <p>Bootstrap Theme Made By <a href="https://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">www.w3schools.com</a></p>
+    </footer>
+
+    <script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip();
+})
+    </script>
+
+
+
+
+
