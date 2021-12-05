@@ -11,8 +11,8 @@ namespace CrowdfundingMvc.Models
     public class ProjectImage
     {
         public Project Project { get; set; }
-
+        public int projId { get; set; }
         public IFormFile ProjectImageFile { get; set;  }
-
+        public FundingPackage FundingPackage { get; set; }
     }
 }

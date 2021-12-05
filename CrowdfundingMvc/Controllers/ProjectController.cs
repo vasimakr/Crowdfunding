@@ -14,12 +14,14 @@ namespace CrowdfundingMvc.Controllers
     public class ProjectController : Controller
     {
         private readonly IProjectService projectService;
+        private readonly IFundingPackageService fundingPackageService;
         private readonly IHostEnvironment hostEnvironment;
 
-        public ProjectController(IProjectService projectService, IHostEnvironment hostEnvironment)
+        public ProjectController(IProjectService projectService, IHostEnvironment hostEnvironment, IFundingPackageService fundingPackageService)
         {
             this.projectService = projectService;
             this.hostEnvironment = hostEnvironment;
+            this.fundingPackageService = fundingPackageService;
         }
 
 
@@ -27,7 +29,7 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult Index()
         {
             List<Project> projects = projectService.ReadProject(1, 10);
-            return View();
+            return View(projects);
         }
 
         public IActionResult Get(int Id)
@@ -44,7 +46,11 @@ namespace CrowdfundingMvc.Controllers
             return View();
 
         }
+        public IActionResult CreateFundingPackage()
+        {
+            return View();
 
+        }
         [HttpPost]
         public IActionResult Create(ProjectImage projectImage)
         {
@@ -64,11 +70,20 @@ namespace CrowdfundingMvc.Controllers
 
             projectService.CreateProject(project);
 
+            return RedirectToAction(nameof(CreateFundingPackage));
+
+
+
+
+        }
+        [HttpPost]
+        public IActionResult CreateFundingPackage(ProjectImage projectImage)
+        {
+            FundingPackage fP = projectImage.FundingPackage;
+            Project project = projectImage.Project;
+
+            fundingPackageService.CreateFundingPackage(project.Id,fP);
             return RedirectToAction(nameof(Index));
-
-
-
-
         }
 
         private string GetUniqueFileName(string fileName)

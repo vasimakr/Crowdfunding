@@ -25,13 +25,12 @@
     <div>
         Description
     </div>
-
     <div>
         <input asp-for="Project.Description" placeholder="Description" />
     </div>
-
-    <br />
-
+    <div>
+        <input asp-for="Project.StatusUpdate" placeholder="StatusUpdate" />
+    </div>
     <div>
         Goal
     </div>
@@ -49,6 +48,7 @@
     <div>
         <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<Category>())"></select>
     </div>
+    <input type="hidden" asp-for="Project.Id" />
 
     <br />
 
