@@ -17,9 +17,10 @@
             background-position: 10px 12px;
             background-repeat: no-repeat;
             width: 100%;
-            font-size: 16px;
+            font-size: 9px;
+            letter-spacing: 2px;
             padding: 12px 20px 12px 40px;
-            border: 1px solid #ddd;
+            border: 0px solid #ddd;
             margin-bottom: 12px;
         }
 
@@ -35,7 +36,7 @@
                 background-color: #f6f6f6;
                 padding: 12px;
                 text-decoration: none;
-                font-size: 18px;
+                font-size: 11px;
                 color: black;
                 display: block
             }
@@ -81,12 +82,25 @@
     </div>
 </nav>
 
+    <br />
+
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Project" title="Type in a Project's Name'">
+
+    <br />
+    <br />
+
     <a class="btn btn-primary" asp-action="CreateProject">Funded Projects</a> <!--Pou koitaei to CreateProject-->
     <a class="btn btn-primary" asp-action="CreateProject">Rewards</a>    <!--Pou koitaei to CreateProject-->
 
+    <br />
+    <br />
+    <br />
+
     <div class="card-body">
         <h4 class="card-title"> My Projects </h4>
+
+        <br />
+
         <p>Project 1</p>
         <p>Project 2</p>
         <p>Project 3</p>
@@ -118,5 +132,9 @@
             }
         }
     </script>
+
+ <div class="container">
+
+ </div>
 
 </body>

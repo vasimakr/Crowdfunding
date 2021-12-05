@@ -1,40 +1,56 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+     ViewData["Title"] = "Create a new Project";
 }
 @using Crowdfunding.Model
 @model ProjectImage
+
+<h3>@ViewData["Title"]</h3>
+
+<hr />
+<br />
+
+<div class="form">
 
 <form asp-action="Create" enctype="multipart/form-data">
     <div>
         Title
     </div>
+
     <div>
         <input asp-for="Project.Title" placeholder="Title" />
     </div>
+
+    <br />
+
     <div>
         Description
     </div>
 
     <div>
-        Status Update
+        <input asp-for="Project.Description" placeholder="Description" />
     </div>
-    <div>
-        <input asp-for="Project.StatusUpdate" placeholder="StatusUpdate" />
-    </div>
+
+    <br />
+
     <div>
         Goal
     </div>
+
     <div>
         <input asp-for="Project.Goal" placeholder="Goal" />
     </div>
+
+    <br />
+
     <div>
         Category
     </div>
+
     <div>
         <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<Category>())"></select>
     </div>
+
+    <br />
 
     <!--  IMAGE KAI VIDEO OTAN MPOUN
     <dl>
@@ -56,13 +72,19 @@
             <span asp-validation-for="ProjectVideo"></span>
         </dd>
     </dl>
+    </div>
         -->
-
-
-    <hr> <!-- grammh -->
 
     <div class="form-group">
         <input type="submit" value="Finalize Project" class="btn btn-primary" />
     </div>
 
 </form>
+
+ <div class="container">
+
+ </div>
+
+  <div class="container">
+
+ </div>
