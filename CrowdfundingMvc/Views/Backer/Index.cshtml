@@ -5,9 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1> Backer Screen </h1>
-
-
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -50,11 +47,44 @@
 </head>
 <body>
 
-    <h2>Browse for Projects</h2>
+     <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Browse Projects</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+               
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Browse by Category
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Movies</a></li>
+                        <li><a href="#">Boardgames</a></li>
+                        <li><a href="#">Applications</a></li>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Technology and Electronics</a></li>
+                        <li><a href="#">Nutrition</a></li>
+                        <li><a href="#">Other</a></li>
+                    </ul>
+                </li>
+                <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
     <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Project" title="Type in a Project's Name'">
     <a class="btn btn-primary" asp-action="CreateProject">Funded Projects</a> <!--Pou koitaei to CreateProject-->
     <a class="btn btn-primary" asp-action="CreateProject">Rewards</a>    <!--Pou koitaei to CreateProject-->
+
     <div class="card-body">
         <h4 class="card-title"> My Projects </h4>
         <p>Project 1</p>
