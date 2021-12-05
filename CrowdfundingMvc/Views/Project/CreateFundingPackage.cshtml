@@ -5,33 +5,32 @@
 }
 @using Crowdfunding.Model
 @model ProjectImage
-
-<form asp-action="Create" enctype="multipart/form-data">
+<form asp-action="CreateFundingPackage" enctype="multipart/form-data">
+    <input type="hidden" asp-for="Project.Id" />
     <div>
-        Title
+        Tier
     </div>
     <div>
-        <input asp-for="Project.Title" placeholder="Title" />
+        <input asp-for="FundingPackage.Tier" placeholder="Tier" />
     </div>
     <div>
         Description
     </div>
     <div>
-        <input asp-for="Project.Description" placeholder="Description" />
+        <input asp-for="FundingPackage.Description" placeholder="Description" />
     </div>
     <div>
-        Goal
+        Price
     </div>
     <div>
-        <input asp-for="Project.Goal" placeholder="Goal" />
+        <input asp-for="FundingPackage.Price" placeholder="Price" />
     </div>
     <div>
-        Category
+        Name
     </div>
     <div>
-        <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<Category>())"></select>
+        <input asp-for="FundingPackage.Name" placeholder="Name" />
     </div>
-    <input type="hidden" asp-for="Project.Id" />
 
     <!--  IMAGE KAI VIDEO OTAN MPOUN
     <dl>
@@ -59,7 +58,7 @@
     <hr> <!-- grammh -->
 
     <div class="form-group">
-        <input type="submit" value="Finalize Project" class="btn btn-primary" />
+        <input type="submit" value="Create Funding Tier" class="btn btn-primary" />
     </div>
 
 </form>
