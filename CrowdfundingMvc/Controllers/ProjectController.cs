@@ -69,7 +69,8 @@ namespace CrowdfundingMvc.Controllers
             }
 
             projectService.CreateProject(project);
-
+            
+            TempData["ID"] = project.Id;
             return RedirectToAction(nameof(CreateFundingPackage));
 
 
@@ -80,9 +81,9 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult CreateFundingPackage(ProjectImage projectImage)
         {
             FundingPackage fP = projectImage.FundingPackage;
-            Project project = projectImage.Project;
+            var Id = Convert.ToInt16(TempData["ID"]);
 
-            fundingPackageService.CreateFundingPackage(project.Id,fP);
+            fundingPackageService.CreateFundingPackage(Id,fP);
             return RedirectToAction(nameof(Index));
         }
 

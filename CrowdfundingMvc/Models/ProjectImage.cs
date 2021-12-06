@@ -8,10 +8,10 @@ using Microsoft.AspNetCore.Http;
 
 namespace CrowdfundingMvc.Models
 {
+    [Serializable]
     public class ProjectImage
     {
         public Project Project { get; set; }
-        public int projId { get; set; }
         public IFormFile ProjectImageFile { get; set;  }
         public FundingPackage FundingPackage { get; set; }
     }

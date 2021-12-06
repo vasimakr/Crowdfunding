@@ -11,50 +11,51 @@
 
 <div class="form">
 
-<form asp-action="Create" enctype="multipart/form-data">
-    <div>
-        Title
-    </div>
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div>
+            Title
+        </div>
 
-    <div>
-        <input asp-for="Project.Title" placeholder="Title" />
-    </div>
+        <div>
+            <input asp-for="Project.Title" placeholder="Title" />
+        </div>
 
-    <br />
+        <br />
 
-    <div>
-        Description
-    </div>
+        <div>
+            Description
+        </div>
 
-    <div>
-        <input asp-for="Project.Description" placeholder="Description" />
-    </div>
+        <div>
+            <input asp-for="Project.Description" placeholder="Description" />
+        </div>
 
-    <br />
+        <br />
 
-    <div>
-        Goal
-    </div>
+        <div>
+            Goal
+        </div>
 
-    <div>
-        <input asp-for="Project.Goal" placeholder="Goal" />
-    </div>
+        <div>
+            <input asp-for="Project.Goal" placeholder="Goal" />
+        </div>
 
-    <br />
+        <br />
 
-    <div>
-        Category
-    </div>
+        <div>
+            Category
+        </div>
 
-    <div>
-        <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<Category>())"></select>
-    </div>
+        <div>
+            <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<Category>())"></select>
+        </div>
 
-    <input type="hidden" asp-for="Project.Id" />
+        
 
-    <br />
+        <br />
+        <input type="hidden" asp-for="Project.Id" />
 
-    <!--  IMAGE KAI VIDEO OTAN MPOUN
+        <!--  IMAGE KAI VIDEO OTAN MPOUN
     <dl>
         <dt>
             <label asp-for="ProjectImage"></label>
@@ -77,11 +78,11 @@
     </div>
         -->
 
-    <div class="form-group">
-        <input type="submit" value="Finalize Project" class="btn btn-primary" />
-    </div>
+        <div class="form-group">
+            <input type="submit" value="Finalize Project" class="btn btn-primary" />
+        </div>
 
-</form>
+    </form>
 
  <div class="container">
 
