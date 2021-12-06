@@ -27,6 +27,11 @@ namespace CrowdfundingMvc.Controllers
             return View();
         }
 
+        public IActionResult SignInB()
+        {
+            return View();
+        }
+
         [ActivatorUtilitiesConstructor] //Den eimai ka8olou sigouros an auto mas swzei apto na ftiaksoume ksexwristo controller entelws gia Users
                                         //mia periergh me8odos prokeimenou na valw ton 2o constructor xwris na crasharei
         public BackerController(FundRaiserContext context)

@@ -2,7 +2,6 @@
     ViewData["Title"] = "Sign up";
 }
 @model Crowdfunding.Model.User
-<!-- megalh pi8anothta na exei paixtei malakia me ta models epd den pairnei  2  Atmodel gia Backer kai Creator ksexwrista [den to exw testarei] -->
 
 <h3>@ViewData["Title"]</h3>
 
@@ -65,11 +64,12 @@
         </form>
     </div>
 </div>
-<div>
 
 <br />
 <br />
-    <input type="submit" value="Go Back to Home Page" class="btn btn-primary" />
+
+<div>
+    <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Go Back to Home Page</a> <!-- redirect -> homepage -->
 </div>
 
 <div class="container">

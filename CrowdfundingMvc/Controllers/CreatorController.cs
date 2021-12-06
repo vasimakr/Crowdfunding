@@ -20,6 +20,12 @@ namespace CrowdfundingMvc.Controllers
         {
             return View();
         }
+
+        public IActionResult SignInC()
+        {
+            return View();
+        }
+
         public CreatorController(ICreatorService creatorService)
         {
             _creatorService = creatorService;
@@ -36,7 +42,7 @@ namespace CrowdfundingMvc.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
 
