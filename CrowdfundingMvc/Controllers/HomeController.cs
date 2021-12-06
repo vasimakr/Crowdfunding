@@ -27,10 +27,7 @@ namespace CrowdfundingMvc.Controllers
         {
             return View();
         }
-        public IActionResult SignIn()
-        {
-            return View();
-        }
+
         public IActionResult SignUp()
         {
             return View();
@@ -44,10 +41,15 @@ namespace CrowdfundingMvc.Controllers
             return View();
         }
 
+        public IActionResult SignInC()
+        {
+            return View();
+        }
 
-
-
-
+        public IActionResult SignInB()
+        {
+            return View();
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
