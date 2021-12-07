@@ -8,23 +8,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Crowdfunding.Model;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace CrowdfundingMvc.Controllers
 {
     public class BackerController : Controller
     {
-        private readonly IBackerService _backerService;
+        private readonly IBackerService backerService;
+        private readonly IProjectService projectService;
+        private readonly FundRaiserContext context;
+        private readonly IHostEnvironment hostEnvironment;
 
-        private readonly FundRaiserContext _context;
-
-        public BackerController( IBackerService backerService)
+        [ActivatorUtilitiesConstructor]
+        public BackerController( IBackerService backerService, IProjectService projectService, FundRaiserContext context, IHostEnvironment hostEnvironment)
         {
-            _backerService = backerService;
+            this.backerService = backerService;
+            this.projectService = projectService;
+            this.context = context;
+            this.hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var id = Convert.ToInt32(TempData["activeBacker"]);
+
+            List<Project> projects = projectService.BReadProject(1, 20, id);
+            return View(projects);
         }
 
         public IActionResult SignInB()
@@ -32,12 +41,6 @@ namespace CrowdfundingMvc.Controllers
             return View();
         }
 
-        [ActivatorUtilitiesConstructor] //Den eimai ka8olou sigouros an auto mas swzei apto na ftiaksoume ksexwristo controller entelws gia Users
-                                        //mia periergh me8odos prokeimenou na valw ton 2o constructor xwris na crasharei
-        public BackerController(FundRaiserContext context)
-        {
-            _context = context;
-        }
         // Onomasthke BackerCreate logw ths xalia katastashs me to SignUp pou eixa thn faeinh idea na valw 2 formes mesa se ena view
         public IActionResult BackerCreate()
         {
@@ -47,12 +50,12 @@ namespace CrowdfundingMvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         
-        public async Task<IActionResult> BackerCreate([Bind("Id,FirstName,LastName,Email")] Backer backer)
+        public IActionResult BackerCreate([Bind("Id,FirstName,LastName,Email")] Backer backer)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(backer);
-                await _context.SaveChangesAsync();
+                backerService.CreateBacker(backer);
+                TempData["activeBacker"] = backer.Id;
                 return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
             }
             return View(backer);

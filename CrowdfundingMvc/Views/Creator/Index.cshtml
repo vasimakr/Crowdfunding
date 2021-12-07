@@ -5,29 +5,65 @@
     ViewData["Title"] = "Creator";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model List<Crowdfunding.Model.Project>
 
- <a class="btn btn-primary" asp-area="" asp-controller="Project" asp-action="Create">Create a new project</a>
+<a class="btn btn-primary" asp-area="" asp-controller="Project" asp-action="Create">Create a new project</a>
 
- <br />
- <br />
+<br />
+<br />
 
-<div class="card-body">
-    <h4 class="card-title"> My Projects </h4>
+<p>Dashboard</p>
 
-    <br />
 
-    <p>Project 1</p>
-    <p>Project 2</p>
-    <p>Project 3</p>
-    <p>Project 4</p>
-    <p>Project 5</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <!--<th>image</th>-
+            <th>video</th>-->
+            <th>Fundings</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var project in Model)
+        {
+            <tr>
+                <td> @project.Title</td>
+                <td> @project.Description </td>
+                <td>
+
+
+
+                    @if (project.Description != null)
+                    {
+                        <img src="/images/@project.Description" title="Project image" width="100px" height="100px" />
+                    }
+
+
+
+                </td>
+                <td> @project.Fundings </td>
+                <td> @project.StatusUpdate </td>
+                <td> @project.Category </td>
+                @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
+                    <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<hr />
+
+<div class="container">
 
 </div>
 
 <div class="container">
 
 </div>
-
- <div class="container">
-
- </div>

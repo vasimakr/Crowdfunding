@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace CrowdfundingMvc.Controllers
 {
@@ -16,19 +17,21 @@ namespace CrowdfundingMvc.Controllers
         private readonly IProjectService projectService;
         private readonly IFundingPackageService fundingPackageService;
         private readonly IHostEnvironment hostEnvironment;
+        private readonly FundRaiserContext context;
 
-        public ProjectController(IProjectService projectService, IHostEnvironment hostEnvironment, IFundingPackageService fundingPackageService)
+        public ProjectController(IProjectService projectService, IHostEnvironment hostEnvironment, IFundingPackageService fundingPackageService, FundRaiserContext context)
         {
             this.projectService = projectService;
             this.hostEnvironment = hostEnvironment;
             this.fundingPackageService = fundingPackageService;
+            this.context = context;
         }
 
 
 
         public IActionResult Index()
         {
-            List<Project> projects = projectService.ReadProject(1, 10);
+            List<Project> projects = projectService.ReadProject(1, 20);
             return View(projects);
         }
 
@@ -49,12 +52,15 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult CreateFundingPackage()
         {
             return View();
-
         }
         [HttpPost]
         public IActionResult Create(ProjectImage projectImage)
         {
             Project project = projectImage.Project;
+            
+            var id = Convert.ToInt32(TempData["activeUser2"]);
+            var creator = context.Creators.Find(id);
+            TempData["activeuser"] = id;
             var img = projectImage.ProjectImageFile;
             if (img!= null)
             {
@@ -64,11 +70,9 @@ namespace CrowdfundingMvc.Controllers
                 img.CopyTo(new FileStream(filePath, FileMode.Create));
 
                 project.Description = uniqueFileName;
-
-
             }
 
-            projectService.CreateProject(project);
+            projectService.CreateProject(project, creator);
             
             TempData["ID"] = project.Id;
             return RedirectToAction(nameof(CreateFundingPackage));

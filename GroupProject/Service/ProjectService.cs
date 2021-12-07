@@ -33,6 +33,12 @@ namespace Crowdfunding.Service
             }
             return new ApiResponse<Project>() { Data = null, Description = "No data saved.", StatusCode = 50 };
         }
+        public bool CreateProject(Project project, Creator creator)
+        {
+            project.Creator = creator;
+            dbContext.Add(project);
+            return dbContext.SaveChanges() == 1;
+        }
 
         public bool DeleteProject(int id)
         {
@@ -48,7 +54,7 @@ namespace Crowdfunding.Service
             return dbContext.Projects.Find(id);
         }
 
-        public List<Project> ReadProject(int pageCount, int pageSize)
+        public List<Project> ReadProject(int pageCount, int pageSize) //Reads list of projects
         {
             if (pageCount <= 0) pageCount = 1;
             if (pageSize <= 0 || pageSize > 20) pageSize = 20;
@@ -57,8 +63,31 @@ namespace Crowdfunding.Service
                 .Take(pageSize)
                 .ToList();
         }
-
-        
+        public List<Project> ReadProject(int pageCount, int pageSize, int creatorId) //Reads projects by specific creator
+        {
+            if (pageCount <= 0) pageCount = 1;
+            if (pageSize <= 0 || pageSize > 20) pageSize = 20;
+            return dbContext.Projects
+                .Where(project => project.Creator.Id.Equals(creatorId))
+                .Skip((pageCount - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+        public List<Project> BReadProject(int pageCount, int pageSize, int backerId) //Reads projects by specific creator
+        {
+            if (pageCount <= 0) pageCount = 1;
+            if (pageSize <= 0 || pageSize > 20) pageSize = 20;
+            var backerpackage = dbContext.BackerPackages.Where(backerpackage => backerpackage.Backer.Id==backerId);
+   
+            
+            
+            return dbContext.Projects
+                .Where(backerpackage => backerpackage.Backer.Id.Equals(backerId))
+                .Inculde(item)
+                .Skip((pageCount - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
 
         public Project UpdateProject(int projectId, Project project)
         {

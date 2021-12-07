@@ -8,17 +8,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace CrowdfundingMvc.Controllers
 {
 
     public class CreatorController : Controller
     {
-        private readonly FundRaiserContext _context;
-        private readonly ICreatorService _creatorService;
+        private readonly IProjectService projectService;
+        private readonly FundRaiserContext context;
+        private readonly ICreatorService creatorService;
+        private readonly IHostEnvironment hostEnvironment;
+
+        [ActivatorUtilitiesConstructor]//Den eimai ka8olou sigouros an auto mas swzei apto na ftiaksoume ksexwristo controller entelws gia Users
+                                       //mia periergh me8odos prokeimenou na valw ton 2o constructor xwris na crasharei
+        public CreatorController(IProjectService projectService, FundRaiserContext context, ICreatorService creatorService, IHostEnvironment hostEnvironment)
+        {
+            this.projectService = projectService;
+            this.context = context;
+            this.hostEnvironment = hostEnvironment;
+            this.creatorService = creatorService;
+        }
         public IActionResult Index()
         {
-            return View();
+            var id = Convert.ToInt32(TempData["activeUser"]);
+            
+            List<Project> projects = projectService.ReadProject(1, 20, id);
+  
+            return View(projects);
+
         }
 
         public IActionResult SignInC()
@@ -26,18 +44,6 @@ namespace CrowdfundingMvc.Controllers
             return View();
         }
 
-        public CreatorController(ICreatorService creatorService)
-        {
-            _creatorService = creatorService;
-        }
-
-        [ActivatorUtilitiesConstructor] //Den eimai ka8olou sigouros an auto mas swzei apto na ftiaksoume ksexwristo controller entelws gia Users
-                                        //mia periergh me8odos prokeimenou na valw ton 2o constructor xwris na crasharei
-        public CreatorController(FundRaiserContext context) 
-        {
-            _context = context;
-        }
-        
         public IActionResult CreatorCreate()
         {
             return View();
@@ -46,12 +52,13 @@ namespace CrowdfundingMvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> CreatorCreate([Bind("Id,FirstName,LastName,Email")] Creator creator)
+        public IActionResult CreatorCreate([Bind("Id,FirstName,LastName,Email")] Creator creator)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(creator);
-                await _context.SaveChangesAsync();
+                creatorService.CreateCreator(creator);
+                TempData["activeUser"] = creator.Id;
+                TempData["activeUser2"] = creator.Id;
                 return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
             }
             return View(creator);
