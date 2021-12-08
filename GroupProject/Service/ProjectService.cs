@@ -77,16 +77,29 @@ namespace Crowdfunding.Service
         {
             if (pageCount <= 0) pageCount = 1;
             if (pageSize <= 0 || pageSize > 20) pageSize = 20;
-            var backerpackage = dbContext.BackerPackages.Where(backerpackage => backerpackage.Backer.Id==backerId);
-   
-            
-            
-            return dbContext.Projects
-                .Where(backerpackage => backerpackage.Backer.Id.Equals(backerId))
-                .Inculde(item)
-                .Skip((pageCount - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            var existance = dbContext.BackerPackages
+                                     .Where(backerpackage => backerpackage.Backer.Id == backerId)
+                                     .ToList();
+            if (existance.Count() == 0) return null;
+
+            var backerpackages = dbContext.BackerPackages
+                                          .Where(backerpackage => backerpackage.Backer.Id==backerId)
+                                          .GroupBy(q => q.Id)
+                                          .Select(g => g.First())
+                                          .Skip((pageCount - 1) * pageSize)
+                                          .Take(pageSize)
+                                          .ToList();
+
+            List<Project> finalList = new List<Project>();
+            backerpackages.ForEach(pack => finalList.Add(dbContext.Projects.Find(pack.Id)));
+
+            //return dbContext.Projects
+            //    .Where(backerpackage => backerpackage.Backer.Id.Equals(backerId))
+            //    .Inculde(item)
+            //    .Skip((pageCount - 1) * pageSize)
+            //    .Take(pageSize)
+            //    .ToList();
+            return finalList;
         }
 
         public Project UpdateProject(int projectId, Project project)

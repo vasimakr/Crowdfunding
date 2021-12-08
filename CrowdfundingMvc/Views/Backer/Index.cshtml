@@ -109,7 +109,7 @@
         </thead>
         <tbody>
 
-            @foreach (var project in Model)
+            @foreach (var project in Model ?? Enumerable.Empty<Crowdfunding.Model.Project>())
             {
                 <tr>
                     <td> @project.Title</td>
