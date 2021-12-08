@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model List<Crowdfunding.Model.Project>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -56,7 +57,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Browse Projects</a>
+            <a class="navbar-brand" href="">Browse Projects</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
@@ -67,13 +68,13 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Movies</a></li>
-                        <li><a href="#">Boardgames</a></li>
-                        <li><a href="#">Applications</a></li>
-                        <li><a href="#">Games</a></li>
-                        <li><a href="#">Technology and Electronics</a></li>
-                        <li><a href="#">Nutrition</a></li>
-                        <li><a href="#">Other</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Movies">Movies</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Boardgames">Boardgames</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Applications">Applications</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Games">Games</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="TechnologyandElectronics">Technology and Electronics</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Nutrition">Nutrition</a></li>
+                        <li class="nav-item"> <a class="nav-link text-dark" asp-area="" asp-controller="Project" asp-action="Other">Other</a></li>
                     </ul>
                 </li>
                 <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
@@ -89,12 +90,12 @@
     <br />
     <br />
 
-    <a class="btn btn-primary" asp-action="CreateProject">Funded Projects</a> <!-- not working -->
-    <a class="btn btn-primary" asp-action="CreateProject">Rewards</a>    <!-- not working -->
+    <a class="btn btn-primary" asp-controller="Project" asp-action="Index">View all Projects</a>
 
     <br />
     <br />
     <br />
+
 
     <table class="table">
         <thead>
@@ -107,8 +108,8 @@
                 <th>Category</th>
             </tr>
         </thead>
-        <tbody>
 
+            <h3>Funded Projects</h3>
             @foreach (var project in Model ?? Enumerable.Empty<Crowdfunding.Model.Project>())
             {
                 <tr>
@@ -156,6 +157,10 @@
     </script>
 
  <div class="container">
+
+ </div>
+
+  <div class="container">
 
  </div>
 

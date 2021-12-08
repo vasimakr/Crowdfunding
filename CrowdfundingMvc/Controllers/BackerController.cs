@@ -37,6 +37,12 @@ namespace CrowdfundingMvc.Controllers
         {
             return View();
         }
+
+        public IActionResult ProjectEdit()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult SignInB([Bind("Username")] Backer backer)
         {
