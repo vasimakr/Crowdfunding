@@ -30,7 +30,7 @@ namespace CrowdfundingMvc.Controllers
 
         public IActionResult Index()
         {
-            List<Project> projects = projectService.BReadProject(1, 20, Startup.userId);
+            List<Project> projects = projectService.BReadProject(1, 20, Startup.UserId);
             return View(projects);
         }
         public IActionResult SignInB()
@@ -41,7 +41,7 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult SignInB([Bind("Username")] Backer backer)
         {
             var userBacker = backerService.ReadBacker(backer.Username);
-            Startup.userId = backer.Id;
+            Startup.UserId = userBacker.Id;
             return RedirectToAction(nameof(Index));
 
         }
@@ -60,7 +60,7 @@ namespace CrowdfundingMvc.Controllers
             if (ModelState.IsValid)
             {
                 backerService.CreateBacker(backer);
-                Startup.userId = backer.Id;
+                Startup.UserId = backer.Id;
                 return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
             }
             return View(backer);

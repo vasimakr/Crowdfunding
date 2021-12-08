@@ -27,8 +27,6 @@ namespace CrowdfundingMvc.Controllers
             this.context = context;
         }
 
-
-
         public IActionResult Index()
         {
             List<Project> projects = projectService.ReadProject(1, 20);
@@ -57,11 +55,8 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult Create(ProjectImage projectImage)
         {
             Project project = projectImage.Project;
-            
-      //     var id = Convert.ToInt32(TempData["activeUser2"]);
-      //     id= Convert.ToInt32(TempData["activeUser3"]);
-            var creator = context.Creators.Find(Startup.userId);
-      //      TempData["activeuser"] = id;
+            var creator = context.Creators.Find(Startup.UserId);
+
             var img = projectImage.ProjectImageFile;
             if (img!= null)
             {
@@ -75,20 +70,15 @@ namespace CrowdfundingMvc.Controllers
 
             projectService.CreateProject(project, creator);
             
-            TempData["ID"] = project.Id;
+            Startup.ProjectId = project.Id;
             return RedirectToAction(nameof(CreateFundingPackage));
-
-
-
-
         }
         [HttpPost]
         public IActionResult CreateFundingPackage(ProjectImage projectImage)
         {
             FundingPackage fP = projectImage.FundingPackage;
-            var Id = Convert.ToInt16(TempData["ID"]);
 
-            fundingPackageService.CreateFundingPackage(Id,fP);
+            fundingPackageService.CreateFundingPackage(Startup.ProjectId,fP);
             return RedirectToAction("Index", "Creator");
         }
 

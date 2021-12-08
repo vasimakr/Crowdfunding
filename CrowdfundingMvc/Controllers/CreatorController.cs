@@ -33,7 +33,7 @@ namespace CrowdfundingMvc.Controllers
         {
             //var id = Convert.ToInt32(TempData["activeUser"]);
             //var id = Startup.userId;
-            List<Project> projects = projectService.ReadProject(1, 20, Startup.userId);
+            List<Project> projects = projectService.ReadProject(1, 20, Startup.UserId);
   
             return View(projects);
 
@@ -46,7 +46,7 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult SignInC([Bind("Username")] Creator creator)
         {
             var userCreator = creatorService.ReadCreator(creator.Username);
-            Startup.userId = userCreator.Id;
+            Startup.UserId = userCreator.Id;
             
             return RedirectToAction(nameof(Index));
         }
@@ -65,7 +65,7 @@ namespace CrowdfundingMvc.Controllers
                 creatorService.CreateCreator(creator);
                 //TempData["activeUser"] = creator.Id;
                // TempData["activeUser2"] = creator.Id;
-                Startup.userId = creator.Id;
+                Startup.UserId = creator.Id;
                 return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
             }
             return View(creator);

@@ -15,7 +15,8 @@ namespace CrowdfundingMvc
 {
     public class Startup
     {
-        public static int userId=0;
+        public static int UserId = 0;
+        public static int ProjectId = 0;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

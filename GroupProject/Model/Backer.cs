@@ -11,8 +11,7 @@ namespace Crowdfunding.Model
 {
     public class Backer : User
     {
-        [Key]
-        public int Id { get; set; }
+        
         [InverseProperty("Backer")]
         public virtual List<BackerPackage> BackerPackages { get; set; }
 
