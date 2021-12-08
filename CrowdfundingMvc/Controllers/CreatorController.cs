@@ -61,6 +61,7 @@ namespace CrowdfundingMvc.Controllers
             return View(creator);
         }
 
+        //GET Creator/ProjectEdit
         public IActionResult ProjectEdit()
         {
             return View();
