@@ -32,7 +32,7 @@ namespace CrowdfundingMvc.Controllers
         {
             var id = Convert.ToInt32(TempData["activeBacker"]);
 
-            List<Project> projects = projectService.BReadProject(1, 20, id);
+            List<Project> projects = projectService.BReadProject(1, 20, 1);
             return View(projects);
         }
 

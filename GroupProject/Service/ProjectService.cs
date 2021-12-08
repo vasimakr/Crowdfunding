@@ -84,8 +84,8 @@ namespace Crowdfunding.Service
 
             var backerpackages = dbContext.BackerPackages
                                           .Where(backerpackage => backerpackage.Backer.Id==backerId)
-                                          .GroupBy(q => q.Id)
-                                          .Select(g => g.First())
+                                          //.GroupBy(q => q.FundingPackage.Id)
+                                          //.Select(g => g.First())
                                           .Skip((pageCount - 1) * pageSize)
                                           .Take(pageSize)
                                           .ToList();
