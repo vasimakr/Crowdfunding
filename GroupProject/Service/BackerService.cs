@@ -56,7 +56,12 @@ namespace Crowdfunding.Service
                 return dbContext.Backers.Find(id);
             }
 
-            public List<Backer> ReadBacker()
+        public Backer ReadBacker(string username)
+        {
+            return dbContext.Backers.Where(aBacker => aBacker.Username.Equals(username)).First();
+        }
+
+        public List<Backer> ReadBacker()
             {
                 return dbContext.Backers.ToList();
             }
@@ -66,6 +71,7 @@ namespace Crowdfunding.Service
                 var dbBacker = dbContext.Backers.Find(backerId);
                 if (dbBacker == null) throw new KeyNotFoundException();
                 dbBacker.Email = backer.Email;
+                dbBacker.Username = backer.Username;
                 dbBacker.FirstName = backer.FirstName;
                 dbBacker.LastName = backer.LastName;
                 dbContext.SaveChanges();

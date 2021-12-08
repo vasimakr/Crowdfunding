@@ -52,7 +52,7 @@ namespace CrowdfundingMvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public IActionResult CreatorCreate([Bind("Id,FirstName,LastName,Email")] Creator creator)
+        public IActionResult CreatorCreate([Bind("Id,Username,FirstName,LastName,Email")] Creator creator)
         {
             if (ModelState.IsValid)
             {

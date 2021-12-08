@@ -15,6 +15,8 @@ namespace Crowdfunding.Service
 
         public Backer ReadBacker(int id);
 
+        public Backer ReadBacker(string username);
+
         public List<Backer> ReadBacker();
 
         public Backer UpdateBacker(int backerId, Backer backer);
