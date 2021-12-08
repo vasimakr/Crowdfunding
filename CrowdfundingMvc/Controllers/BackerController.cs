@@ -36,8 +36,12 @@ namespace CrowdfundingMvc.Controllers
             return View(projects);
         }
 
-        public IActionResult SignInB()
+        public IActionResult SignInB([Bind("Username")] Backer backer)
         {
+            var userBacker = backerService.ReadBacker(backer.Username);
+            TempData["activeBacker"] = backer.Id;
+            if(backer.Id != 0) return RedirectToAction(nameof(Index));
+
             return View();
         }
 
@@ -50,7 +54,7 @@ namespace CrowdfundingMvc.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         
-        public IActionResult BackerCreate([Bind("Id,FirstName,LastName,Email")] Backer backer)
+        public IActionResult BackerCreate([Bind("Id,Username,FirstName,LastName,Email")] Backer backer)
         {
             if (ModelState.IsValid)
             {

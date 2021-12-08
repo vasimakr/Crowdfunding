@@ -8,8 +8,55 @@ namespace Crowdfunding
     {
         static void Main(string[] args)
         {
-            
-        }
+            using var fundRaiserContext = new FundRaiserContext();
+
+            var creatorService = new CreatorService(fundRaiserContext);
+            var backerService = new BackerService(fundRaiserContext);
+            var projectService = new ProjectService(fundRaiserContext);
+            var fundPackageService = new FundingPackageService(fundRaiserContext);
+
+            var creator = new Creator
+            {
+                FirstName = "Bob2",
+                LastName = "Dod2",
+                Email = "bobdod2@gmail.com",
+            };
+            creatorService.CreateCreator(creator);
+
+            var project = new Project
+            {
+                Title = "Test",
+                Description = "this is another test project",
+                Goal = 300,
+                Category = Category.BOARDGAMES,
+                Creator = creator
+            };
+            projectService.CreateProject(project);
+
+            var fundingPackage = new FundingPackage
+            {
+                Name = "aaaaaaaaaaaaaaaaaaaaaaaa",
+                Tier = 3,
+                Description = "help",
+                Price = 10
+            };
+            Console.WriteLine($" Pre Create -- Funding Package: {fundingPackage.Id}");
+
+            fundPackageService.CreateFundingPackage(project.Id, fundingPackage);
+            Console.WriteLine($" Post Create -- Funding Package: {fundingPackage.Id}");
+
+            var backer = new Backer
+            {
+                FirstName = "mark",
+                LastName = "zucc",
+                Email = "meta@gmail.com"
+            };
+            backerService.CreateBacker(backer);
+            fundPackageService.BuyFundingPackage(9, 1);
+            Console.WriteLine($"Creator: {creator.Id} \n Backer: {backer.Id} \n Funding Package: {fundingPackage.Id}");
+            fundPackageService.BuyFundingPackage(backer.Id, fundingPackage.Id);
+        
+    }
 
         public void Test1()
         {
@@ -103,7 +150,7 @@ namespace Crowdfunding
                 Email = "meta@gmail.com"
             };
             backerService.CreateBacker(backer);
-            fundPackageService.BuyFundingPackage(1, 1);
+            fundPackageService.BuyFundingPackage(9, 1);
             Console.WriteLine($"Creator: {creator.Id} \n Backer: {backer.Id} \n Funding Package: {fundingPackage.Id}");
             fundPackageService.BuyFundingPackage(backer.Id, fundingPackage.Id);
         }//creation w/ services -- 
