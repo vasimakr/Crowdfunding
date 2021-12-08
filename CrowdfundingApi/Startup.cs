@@ -32,6 +32,8 @@ namespace CrowdfundingApi
             services.AddControllers();
             services.AddDbContext<FundRaiserContext>();
             services.AddScoped<IProjectService, ProjectService>();
+            services.AddScoped<IBackerService, BackerService>();
+            services.AddScoped<ICreatorService, CreatorService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrowdfundingApi", Version = "v1" });
