@@ -52,7 +52,7 @@ namespace CrowdfundingMvc.Controllers
 
         }
 
-        [ActivatorUtilitiesConstructor]// Onomasthke BackerCreate logw ths xalia katastashs me to SignUp pou eixa thn faeinh idea na valw 2 formes mesa se ena view
+        [ActivatorUtilitiesConstructor]
         public IActionResult BackerCreate()
         {
             return View();
