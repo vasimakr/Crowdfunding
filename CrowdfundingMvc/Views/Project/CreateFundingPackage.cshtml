@@ -8,6 +8,8 @@
 @using Crowdfunding.Model
 @model ProjectImage
 
+<div class="form">
+
 <form asp-action="CreateFundingPackage" enctype="multipart/form-data">
     <input type="hidden" asp-for="Project.Id" />
     <div>
@@ -65,6 +67,7 @@
     </div>
 
 </form>
+</div>
 
 <div class="container">
 
