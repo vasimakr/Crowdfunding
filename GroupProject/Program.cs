@@ -52,7 +52,7 @@ namespace Crowdfunding
                 Email = "meta@gmail.com"
             };
             backerService.CreateBacker(backer);
-            fundPackageService.BuyFundingPackage(9, 1);
+            fundPackageService.BuyFundingPackage(1029, 1);
             Console.WriteLine($"Creator: {creator.Id} \n Backer: {backer.Id} \n Funding Package: {fundingPackage.Id}");
             fundPackageService.BuyFundingPackage(backer.Id, fundingPackage.Id);
         

@@ -58,7 +58,9 @@ namespace Crowdfunding.Service
 
         public Backer ReadBacker(string username)
         {
-            return dbContext.Backers.Where(aBacker => aBacker.Username.Equals(username)).First();
+            var test = dbContext.Backers.Where(aBacker => aBacker.Username.Equals(username));
+            var test2 = test.First();
+            return test2;
         }
 
         public List<Backer> ReadBacker()

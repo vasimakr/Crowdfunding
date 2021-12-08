@@ -58,9 +58,10 @@ namespace CrowdfundingMvc.Controllers
         {
             Project project = projectImage.Project;
             
-            var id = Convert.ToInt32(TempData["activeUser2"]);
-            var creator = context.Creators.Find(id);
-            TempData["activeuser"] = id;
+      //     var id = Convert.ToInt32(TempData["activeUser2"]);
+      //     id= Convert.ToInt32(TempData["activeUser3"]);
+            var creator = context.Creators.Find(Startup.userId);
+      //      TempData["activeuser"] = id;
             var img = projectImage.ProjectImageFile;
             if (img!= null)
             {
@@ -88,7 +89,7 @@ namespace CrowdfundingMvc.Controllers
             var Id = Convert.ToInt16(TempData["ID"]);
 
             fundingPackageService.CreateFundingPackage(Id,fP);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", "Creator");
         }
 
         private string GetUniqueFileName(string fileName)

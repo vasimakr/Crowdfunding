@@ -13,7 +13,7 @@ namespace Crowdfunding.Service
         public void CreateCreator(Creator creator);
 
         public Creator ReadCreator(int id);
-
+        public Creator ReadCreator(string username);
         public List<Creator> ReadCreator();
     }
 }

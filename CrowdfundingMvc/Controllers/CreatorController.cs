@@ -20,8 +20,8 @@ namespace CrowdfundingMvc.Controllers
         private readonly ICreatorService creatorService;
         private readonly IHostEnvironment hostEnvironment;
 
-        [ActivatorUtilitiesConstructor]//Den eimai ka8olou sigouros an auto mas swzei apto na ftiaksoume ksexwristo controller entelws gia Users
-                                       //mia periergh me8odos prokeimenou na valw ton 2o constructor xwris na crasharei
+                                                                        //Den eimai ka8olou sigouros an auto mas swzei apto na ftiaksoume ksexwristo controller entelws gia Users
+        [ActivatorUtilitiesConstructor]                                //mia periergh me8odos prokeimenou na valw ton 2o constructor xwris na crasharei
         public CreatorController(IProjectService projectService, FundRaiserContext context, ICreatorService creatorService, IHostEnvironment hostEnvironment)
         {
             this.projectService = projectService;
@@ -31,19 +31,26 @@ namespace CrowdfundingMvc.Controllers
         }
         public IActionResult Index()
         {
-            var id = Convert.ToInt32(TempData["activeUser"]);
-            
-            List<Project> projects = projectService.ReadProject(1, 20, id);
+            //var id = Convert.ToInt32(TempData["activeUser"]);
+            //var id = Startup.userId;
+            List<Project> projects = projectService.ReadProject(1, 20, Startup.userId);
   
             return View(projects);
 
         }
-
         public IActionResult SignInC()
         {
             return View();
         }
-
+        [HttpPost]
+        public IActionResult SignInC([Bind("Username")] Creator creator)
+        {
+            var userCreator = creatorService.ReadCreator(creator.Username);
+            Startup.userId = userCreator.Id;
+            
+            return RedirectToAction(nameof(Index));
+        }
+        [ActivatorUtilitiesConstructor]
         public IActionResult CreatorCreate()
         {
             return View();
@@ -51,14 +58,14 @@ namespace CrowdfundingMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public IActionResult CreatorCreate([Bind("Id,Username,FirstName,LastName,Email")] Creator creator)
         {
             if (ModelState.IsValid)
             {
                 creatorService.CreateCreator(creator);
-                TempData["activeUser"] = creator.Id;
-                TempData["activeUser2"] = creator.Id;
+                //TempData["activeUser"] = creator.Id;
+               // TempData["activeUser2"] = creator.Id;
+                Startup.userId = creator.Id;
                 return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
             }
             return View(creator);

@@ -69,8 +69,8 @@ namespace Crowdfunding.Service
             if (pageSize <= 0 || pageSize > 20) pageSize = 20;
             return dbContext.Projects
                 .Where(project => project.Creator.Id.Equals(creatorId))
-                .Skip((pageCount - 1) * pageSize)
-                .Take(pageSize)
+               // .Skip((pageCount - 1) * pageSize)
+              //  .Take(pageSize)
                 .ToList();
         }
         public List<Project> BReadProject(int pageCount, int pageSize, int backerId) //Reads projects by specific creator

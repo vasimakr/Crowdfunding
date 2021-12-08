@@ -18,7 +18,7 @@ namespace Crowdfunding.Service
 
         public void CreateCreator(Creator creator)
         {
-
+            
             dbContext.Creators.Add(creator);
             try { dbContext.SaveChanges(); }
             catch { }
@@ -29,7 +29,13 @@ namespace Crowdfunding.Service
 
             
             Creator creator = dbContext.Creators.Find(id);
+
             return creator;
+        }
+        public Creator ReadCreator(string username)
+        {
+            var test = dbContext.Creators.Where(aCreator => aCreator.Username.Equals(username));
+            return test.First();
         }
 
         public List<Creator> ReadCreator()

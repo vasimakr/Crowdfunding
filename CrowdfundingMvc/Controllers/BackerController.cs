@@ -30,22 +30,23 @@ namespace CrowdfundingMvc.Controllers
 
         public IActionResult Index()
         {
-            var id = Convert.ToInt32(TempData["activeBacker"]);
-
-            List<Project> projects = projectService.BReadProject(1, 20, 1);
+            List<Project> projects = projectService.BReadProject(1, 20, Startup.userId);
             return View(projects);
         }
-
+        public IActionResult SignInB()
+        {
+            return View();
+        }
+        [HttpPost]
         public IActionResult SignInB([Bind("Username")] Backer backer)
         {
             var userBacker = backerService.ReadBacker(backer.Username);
-            TempData["activeBacker"] = backer.Id;
-            if(backer.Id != 0) return RedirectToAction(nameof(Index));
+            Startup.userId = backer.Id;
+            return RedirectToAction(nameof(Index));
 
-            return View();
         }
 
-        // Onomasthke BackerCreate logw ths xalia katastashs me to SignUp pou eixa thn faeinh idea na valw 2 formes mesa se ena view
+        [ActivatorUtilitiesConstructor]// Onomasthke BackerCreate logw ths xalia katastashs me to SignUp pou eixa thn faeinh idea na valw 2 formes mesa se ena view
         public IActionResult BackerCreate()
         {
             return View();
@@ -59,7 +60,7 @@ namespace CrowdfundingMvc.Controllers
             if (ModelState.IsValid)
             {
                 backerService.CreateBacker(backer);
-                TempData["activeBacker"] = backer.Id;
+                Startup.userId = backer.Id;
                 return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
             }
             return View(backer);
