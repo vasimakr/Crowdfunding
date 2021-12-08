@@ -19,8 +19,8 @@ namespace Crowdfunding.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;Integrated Security=True");
-            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User =sa;Password=admin!@#123");  //works for Vasili
+            optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;Integrated Security=True");
+            //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User =sa;Password=admin!@#123");  //works for Vasili
             //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User ID=sa;Password=admin!@#123");  //works for Ntina
             //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User ID=sa;Password=admin!@#123");  //works for Mike
             //optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User ID=sa;Password=admin!@123");    //works for Nikita
