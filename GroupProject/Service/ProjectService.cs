@@ -102,7 +102,7 @@ namespace Crowdfunding.Service
             return finalList;
         }
 
-        public Project UpdateProject(int projectId, Project project)
+        public Project UpdateProject(int projectId, Project project) // εδω γιατι προτζεκτ;
         {
             var dbProject = dbContext.Projects.Find(projectId);
             dbProject.Title = project.Title;

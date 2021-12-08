@@ -16,16 +16,12 @@ namespace CrowdfundingMvc.Controllers
     public class CreatorController : Controller
     {
         private readonly IProjectService projectService;
-        private readonly FundRaiserContext context;
         private readonly ICreatorService creatorService;
         private readonly IHostEnvironment hostEnvironment;
 
-                                                                        //Den eimai ka8olou sigouros an auto mas swzei apto na ftiaksoume ksexwristo controller entelws gia Users
-        [ActivatorUtilitiesConstructor]                                //mia periergh me8odos prokeimenou na valw ton 2o constructor xwris na crasharei
-        public CreatorController(IProjectService projectService, FundRaiserContext context, ICreatorService creatorService, IHostEnvironment hostEnvironment)
+        public CreatorController(IProjectService projectService, ICreatorService creatorService, IHostEnvironment hostEnvironment)
         {
             this.projectService = projectService;
-            this.context = context;
             this.hostEnvironment = hostEnvironment;
             this.creatorService = creatorService;
         }
