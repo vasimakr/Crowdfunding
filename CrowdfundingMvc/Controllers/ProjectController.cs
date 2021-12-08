@@ -38,8 +38,6 @@ namespace CrowdfundingMvc.Controllers
             Project project = projectService.ReadProject(Id);
             if (project == null) return NotFound();
             return View(project);
-
-
         }
 
         public IActionResult Create()
@@ -51,6 +49,47 @@ namespace CrowdfundingMvc.Controllers
         {
             return View();
         }
+
+        public IActionResult TrendingProjects()
+        {
+            return View();
+        }
+
+        public IActionResult Applications()
+        {
+            return View();
+        }
+
+        public IActionResult Boardgames()
+        {
+            return View();
+        }
+
+        public IActionResult Games()
+        {
+            return View();
+        }
+
+        public IActionResult Movies()
+        {
+            return View();
+        }
+
+        public IActionResult Nutrition()
+        {
+            return View();
+        }
+
+        public IActionResult Other()
+        {
+            return View();
+        }
+
+        public IActionResult TechnologyandElectronics()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Create(ProjectImage projectImage)
         {
