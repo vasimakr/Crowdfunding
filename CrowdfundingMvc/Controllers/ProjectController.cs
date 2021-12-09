@@ -52,42 +52,50 @@ namespace CrowdfundingMvc.Controllers
 
         public IActionResult TrendingProjects()
         {
-            return View();
+            List<Project> projects = projectService.ReadTrendingProject();
+            return View(projects);
         }
 
         public IActionResult Applications()
         {
-            return View();
+            List<Project> projects = projectService.ReadProjectCat(Category.APPLICATIONS);
+            return View(projects);
         }
 
         public IActionResult Boardgames()
         {
-            return View();
+            List<Project> projects = projectService.ReadProjectCat(Category.BOARDGAMES);
+            return View(projects);
         }
 
         public IActionResult Games()
         {
-            return View();
+            List<Project> projects = projectService.ReadProjectCat(Category.GAMES);
+            return View(projects);
         }
 
         public IActionResult Movies()
         {
-            return View();
+            List<Project> projects = projectService.ReadProjectCat(Category.MOVIES);
+            return View(projects);
         }
 
         public IActionResult Nutrition()
         {
-            return View();
+            List<Project> projects = projectService.ReadProjectCat(Category.NUTRITION);
+            return View(projects);
         }
 
         public IActionResult Other()
         {
-            return View();
+            List<Project> projects = projectService.ReadProjectCat(Category.OTHER);
+            return View(projects);
         }
 
         public IActionResult TechnologyandElectronics()
         {
-            return View();
+            List<Project> projects = projectService.ReadProjectCat(Category.TECHNOLOGY);
+            return View(projects);
         }
 
         [HttpPost]
@@ -116,11 +124,10 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult CreateFundingPackage(ProjectImage projectImage)
         {
             FundingPackage fP = projectImage.FundingPackage;
-
             fundingPackageService.CreateFundingPackage(Startup.ProjectId, fP);
-            return RedirectToAction("Index", "Creator");
+            return RedirectToAction("ProjectEdit", "Creator");
         }
-
+        
         private string GetUniqueFileName(string fileName)
         {
             fileName = Path.GetFileName(fileName);

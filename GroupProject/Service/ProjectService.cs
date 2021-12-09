@@ -1,6 +1,7 @@
 ﻿using Crowdfunding.dto;
 using Crowdfunding.Model;
 using Microsoft.EntityFrameworkCore;
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,23 +92,30 @@ namespace Crowdfunding.Service
 
             backerpackages.ForEach(element => packageList.Add(dbContext.FundingPackages.Where(fp => fp.Id == element.FundingPackage.Id).Include(item => item.Project).First()));
             //backerpackages.ForEach(pack => packageList.Add(dbContext.FundingPackages.Include(item => item.Project));
+            //packageList = packageList.GroupBy(item => item.Id, (key, group) => group.First());
             packageList.ForEach(pack => finalList.Add(dbContext.Projects.Find(pack.Project.Id)));
            
-            //return dbContext.Projects
-            //    .Where(backerpackage => backerpackage.Backer.Id.Equals(backerId))
-            //    .Inculde(item)
-            //    .Skip((pageCount - 1) * pageSize)
-            //    .Take(pageSize)
-            //    .ToList();
-            return finalList;
+            return finalList.DistinctBy(x => x.Id).ToList();
         }
-
+        public List<Project> ReadTrendingProject()
+        {
+            return dbContext.Projects
+               .Where(project => project.IsTrending)
+               .ToList();
+        }
         public Project UpdateStatus(int projectId, string update)
         {
             var project = ReadProject(projectId);
             project.StatusUpdate= update;
             dbContext.SaveChanges();
             return project;
+        }
+        public List<Project> ReadProjectCat(Category category)
+        {
+
+            return dbContext.Projects
+                .Where(project => project.Category.Equals(category))
+                .ToList();
         }
         public Project UpdateProject(int projectId, Project project) // εδω γιατι προτζεκτ;
         {

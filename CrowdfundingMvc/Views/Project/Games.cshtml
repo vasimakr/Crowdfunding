@@ -1,7 +1,7 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{ 
+@{
     ViewData["Title"] = "Games";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -13,14 +13,48 @@
 <hr />
 <br />
 
-<div class="container">
+<a class="btn btn-primary" asp-controller="Project" asp-action="Index">View all Projects</a>
 
-</div>
+<br />
+<br />
+<br />
 
-<div class="container">
 
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>image</th>
+            @*<th>video</th>-->*@
+            @*  <th>Funding</th>*@
+            <th>Category</th>
+        </tr>
+    </thead>
 
-<div class="container">
+    <h3>Funded Projects</h3>
+    @foreach (var project in Model ?? Enumerable.Empty<Crowdfunding.Model.Project>())
+    {
+        <tr>
+            <td> <a href="/backer/projectedit/@project.Id" title="View"><b> @project.Title</b></a></td>
+            <td> @project.Description </td>
+            <td>
 
-</div>
+
+
+                @if (project.Description != null)
+                {
+                    <img src="/images/@project.Description" title="Project image" width="100px" height="100px" />
+                }
+
+
+
+            </td>
+            @* <td> @project.Fundings </td>*@
+            <td> @project.Category </td>
+            @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
+                <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
+        </tr>
+    }
+    </tbody>
+</table>

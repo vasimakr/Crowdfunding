@@ -15,6 +15,7 @@
                 <th scope="col">DESCRIPTION</th>
                 <th scope="col">GOAL</th>
                 <th scope="col">FUNDINGS</th>
+                <th scope="col">PROGRESS</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +24,7 @@
                 <th> @Model.Project.Description</th>
                 <th>@Model.Project.Goal </th>
                 <th>@Model.Project.Fundings</th>
-
+                <th>@(Math.Round((decimal)Model.Project.Fundings/Model.Project.Goal*100))%</th>
             </tr>
 
         </tbody>
@@ -56,7 +57,7 @@
             }
         </tbody>
     </table>
-
+    <a href="/project/createfundingpackage/@Model.Project" title="Add Funding Package"><b>Add Funding Package</b></a>
     <table class="table">
         <thead>
             <tr>
@@ -66,14 +67,14 @@
         </thead>
         <tbody>
 
-            
-                <tr>
-                    <td> @Model.Project.StatusUpdate</td>
 
-                </tr>
-            
+            <tr>
+                <td> @Model.Project.StatusUpdate</td>
 
-         @*   <a href="/project/statusupdate/@Model.Project.Id" title="Status Update"><b>Post a new status update!</b></a>*@
+            </tr>
+
+
+            @*   <a href="/project/statusupdate/@Model.Project.Id" title="Status Update"><b>Post a new status update!</b></a>*@
         </tbody>
 
     </table>

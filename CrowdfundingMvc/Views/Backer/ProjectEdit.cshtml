@@ -18,6 +18,7 @@
             <th scope="col">DESCRIPTION</th>
             <th scope="col">GOAL</th>
             <th scope="col">FUNDING</th>
+            <th scope="col">PROGRESS</th>
         </tr>
     </thead>
     <tbody>
@@ -25,7 +26,8 @@
             <th scope="row">@Model.Project.Title</th>
             <th> @Model.Project.Description</th>
             <th>@Model.Project.Goal </th>
-            <th>@Model.Project.Fundings</th>
+            <th>@Model.Project.Fundings </th>
+            <th>@(Math.Round((decimal)Model.Project.Fundings/Model.Project.Goal*100))%</th>
         </tr>
 
     </tbody>

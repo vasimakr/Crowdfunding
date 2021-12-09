@@ -76,7 +76,7 @@ namespace Crowdfunding.Service
             };
             var project= dbContext.Projects.Find(dbFundingPackage.Project.Id);
             project.Fundings += dbFundingPackage.Price;
-
+            if (project.Fundings > 0.4 * project.Goal) project.IsTrending = true;   //Sets project as trending if it reaches 40% of its goal.
             dbContext.BackerPackages.Add(backerPackage);
             dbContext.SaveChanges();
             return backerPackage;
