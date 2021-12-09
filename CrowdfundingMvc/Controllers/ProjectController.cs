@@ -135,8 +135,12 @@ namespace CrowdfundingMvc.Controllers
                 + "_"
                 + Guid.NewGuid().ToString().Substring(0, 4)
                 + Path.GetExtension(fileName);
-
-
+        }
+        [HttpPost]
+        public IActionResult Search(string search)
+        {
+            var list= projectService.SearchProjects(search);
+            return View(list);
         }
         [HttpPost]
         public IActionResult StatusUpdate([Bind("Id, StatusUpdate")] Project project)

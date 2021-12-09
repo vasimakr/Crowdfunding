@@ -21,6 +21,6 @@ namespace Crowdfunding.Service
         public Project UpdateStatus(int projectId, string update);
         public List<Project> ReadProjectCat(Category category);
         public List<Project> ReadTrendingProject();
-
+        public List<Project> SearchProjects(string searchString);
     }
 }

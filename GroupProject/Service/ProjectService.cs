@@ -117,6 +117,10 @@ namespace Crowdfunding.Service
                 .Where(project => project.Category.Equals(category))
                 .ToList();
         }
+        public List<Project> SearchProjects(string searchString)
+        {
+            return dbContext.Projects.Where(item => item.Title.Equals(searchString)).ToList();
+        }
         public Project UpdateProject(int projectId, Project project) // εδω γιατι προτζεκτ;
         {
             var dbProject = dbContext.Projects.Find(projectId);

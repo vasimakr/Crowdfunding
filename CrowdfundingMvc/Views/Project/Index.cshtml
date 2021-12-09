@@ -49,50 +49,58 @@
         </div>
     </div>
 
-    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Project" title="Type in a Project's Name'">
 </nav>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <!--<th>image</th>-
-            <th>video</th>-->
-            <th>Fundings</th>
-            <th>Category</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var project in Model)
-        {
-        <tr>
-            <td> <a href="/backer/projectedit/@project.Id" title="View"><b> @project.Title</b></a></td>
-            <td> @project.Description </td>
-            <td>
+<br />
+<br />
+<form method="post" action="/Project/Search">
+    <label for="search">Search:</label>
+    <input type="text" name="search" />
+    <input type="submit" value="Search" />
+</form>
+<br />
+<br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <!--<th>image</th>-
+                <th>video</th>-->
+                <th>Fundings</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model)
+            {
+                <tr>
+                    <td> <a href="/backer/projectedit/@project.Id" title="View"><b> @project.Title</b></a></td>
+                    <td> @project.Description </td>
+                    <td>
 
 
 
-                @if (project.Description != null)
-                {
-                    <img src="/images/@project.Description" title="Project image" width="100px" height="100px" />
-                }
+                        @if (project.Description != null)
+                        {
+                            <img src="/images/@project.Description" title="Project image" width="100px" height="100px" />
+                        }
 
 
 
-            </td>
-            <td> @project.Fundings </td>
-            <td> @project.Category </td>
-            @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
-        <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
-        </tr>
-        }
-    </tbody>
-</table>
+                    </td>
+                    <td> @project.Fundings </td>
+                    <td> @project.Category </td>
+                    @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
+                        <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<div class="container">
+    <div class="container">
 
-</div>
+    </div>
 
-<div class="container">
+    <div class="container">
 
-</div>
+    </div>
