@@ -86,7 +86,7 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult BuyPackage(int id)
         {
             fundingPackageService.BuyFundingPackage(Startup.UserId, id);
-            return View();
+            return RedirectToAction(nameof(Index));
         }
     }
 }
