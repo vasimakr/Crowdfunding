@@ -132,7 +132,16 @@ namespace CrowdfundingMvc.Controllers
 
         }
 
-
+        [HttpGet]
+        public IActionResult ProjectView(int id)
+        {
+            var project = projectService.ReadProject(id);
+            var fundingpackage = fundingPackageService.GetFundingPackageList(id);
+            var projectFunding = new ProjectFunding();
+            projectFunding.Project = project;
+            projectFunding.FundingPackages = fundingpackage;
+            return View(projectFunding);
+        }
 
     }
 }

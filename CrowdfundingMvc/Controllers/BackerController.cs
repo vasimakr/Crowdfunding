@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Crowdfunding.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CrowdfundingMvc.Models;
 
 namespace CrowdfundingMvc.Controllers
 {
@@ -16,16 +17,16 @@ namespace CrowdfundingMvc.Controllers
     {
         private readonly IBackerService backerService;
         private readonly IProjectService projectService;
-        private readonly FundRaiserContext context;
         private readonly IHostEnvironment hostEnvironment;
+        private readonly IFundingPackageService fundingPackageService;
 
         [ActivatorUtilitiesConstructor]
-        public BackerController( IBackerService backerService, IProjectService projectService, FundRaiserContext context, IHostEnvironment hostEnvironment)
+        public BackerController( IBackerService backerService, IProjectService projectService,  IHostEnvironment hostEnvironment, IFundingPackageService fundingPackageService)
         {
             this.backerService = backerService;
             this.projectService = projectService;
-            this.context = context;
             this.hostEnvironment = hostEnvironment;
+            this.fundingPackageService = fundingPackageService;
         }
 
         public IActionResult Index()
@@ -71,6 +72,21 @@ namespace CrowdfundingMvc.Controllers
             }
             return View(backer);
         }
-
+        [HttpGet]
+        public IActionResult ProjectEdit(int id)
+        {
+            var project = projectService.ReadProject(id);
+            var fundingpackage = fundingPackageService.GetFundingPackageList(id);
+            var projectFunding = new ProjectFunding();
+            projectFunding.Project = project;
+            projectFunding.FundingPackages = fundingpackage;
+            return View(projectFunding);
+        }
+        [HttpGet]
+        public IActionResult BuyPackage(int id)
+        {
+            fundingPackageService.BuyFundingPackage(Startup.UserId, id);
+            return View();
+        }
     }
 }

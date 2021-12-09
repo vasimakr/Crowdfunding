@@ -95,9 +95,9 @@ namespace Crowdfunding.Service
             return dbContext.FundingPackages.Find(fundingPackageId);
         }
 
-        public List<FundingPackage> GetFundingPackage()
+        public List<FundingPackage> GetFundingPackageList(int id)
         {
-            return dbContext.FundingPackages.ToList();
+            return dbContext.FundingPackages.Where(fp => fp.Project.Id.Equals(id)).ToList();
         }
     } 
 }

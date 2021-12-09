@@ -18,12 +18,14 @@ namespace CrowdfundingMvc.Controllers
         private readonly IProjectService projectService;
         private readonly ICreatorService creatorService;
         private readonly IHostEnvironment hostEnvironment;
+        private readonly IFundingPackageService fundingPackageService;
 
-        public CreatorController(IProjectService projectService, ICreatorService creatorService, IHostEnvironment hostEnvironment)
+        public CreatorController(IProjectService projectService, ICreatorService creatorService, IHostEnvironment hostEnvironment, IFundingPackageService fundingPackageService)
         {
             this.projectService = projectService;
             this.hostEnvironment = hostEnvironment;
             this.creatorService = creatorService;
+            this.fundingPackageService = fundingPackageService;
         }
         public IActionResult Index()
         {
@@ -62,11 +64,20 @@ namespace CrowdfundingMvc.Controllers
         }
 
         //GET Creator/ProjectEdit
-        public IActionResult ProjectEdit()
+     //  public IActionResult ProjectEdit()
+     //  {
+     //      return View();
+     //  }
+        [HttpGet]
+        public IActionResult ProjectEdit(int id)
         {
-            return View();
+            var project = projectService.ReadProject(id);
+            var fundingpackage = fundingPackageService.GetFundingPackageList(id);
+            var projectFunding = new ProjectFunding();
+            projectFunding.Project = project;
+            projectFunding.FundingPackages = fundingpackage;
+            return View(projectFunding);
         }
-
 
     }
 }

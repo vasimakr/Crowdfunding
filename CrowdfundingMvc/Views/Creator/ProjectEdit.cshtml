@@ -3,10 +3,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model Crowdfunding.Model.Project
-
+@using Crowdfunding.Model
+@model ProjectFunding
 <hr />
 
+
+@Model.Project.Title
+@Model.Project.Description
+@Model.Project.Goal
+@Model.Project.Fundings
 <table class="table">
     <thead>
         <tr>
@@ -25,41 +30,40 @@
                 <td> @Package.Name </td>
                 <td> @Package.Description </td>
                 <td> @Package.Price </td>
-                @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
-                    <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
+                @*<td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
+                <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
             </tr>
         }
     </tbody>
 </table>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>Status Updates</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        
-        @foreach (var Update in Model.StatusUpdate)
-        {
+        <thead>
             <tr>
-                <td> @Update</td>
-                @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
-                    <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
+                <th>Status Updates</th>
+
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var Update in Model.Project.StatusUpdate)
+            {
+                <tr>
+                    <td> @Update</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
 
 <div>
-   <a class="btn btn-primary" asp-area="" asp-controller="Creator" asp-action="Index">Go Back</a> <!-- redirect - creatorpage -->  
+    <a class="btn btn-primary" asp-area="" asp-controller="Creator" asp-action="Index">Go Back</a> <!-- redirect - creatorpage -->
 </div>
 
 <br />
 
 <div>
-    <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Go Back to Home Page</a> <!-- redirect - homepage -->  
+    <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">Go Back to Home Page</a> <!-- redirect - homepage -->
 </div>
 
 

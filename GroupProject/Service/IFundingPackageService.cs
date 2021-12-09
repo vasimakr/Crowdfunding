@@ -19,7 +19,7 @@ namespace Crowdfunding.Service
 
         public FundingPackage GetFundingPackage(int fundingPackageId);
 
-        public List<FundingPackage> GetFundingPackage();
+        public List<FundingPackage> GetFundingPackageList(int id);
     }
 }
 

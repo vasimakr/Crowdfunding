@@ -56,12 +56,9 @@ namespace Crowdfunding.Service
 
         public List<Project> ReadProject(int pageCount, int pageSize) //Reads list of projects
         {
-            if (pageCount <= 0) pageCount = 1;
-            if (pageSize <= 0 || pageSize > 20) pageSize = 20;
-            return dbContext.Projects
-                .Skip((pageCount - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+       //     if (pageCount <= 0) pageCount = 1;
+       //     if (pageSize <= 0 || pageSize > 20) pageSize = 20;
+            return dbContext.Projects.ToList();
         }
         public List<Project> ReadProject(int pageCount, int pageSize, int creatorId) //Reads projects by specific creator
         {
@@ -86,13 +83,17 @@ namespace Crowdfunding.Service
                                           .Where(backerpackage => backerpackage.Backer.Id==backerId)
                                           //.GroupBy(q => q.FundingPackage.Id)
                                           //.Select(g => g.First())
-                                          .Skip((pageCount - 1) * pageSize)
-                                          .Take(pageSize)
+                                   //       .Skip((pageCount - 1) * pageSize)
+                                  //        .Take(pageSize)
                                           .ToList();
 
             List<Project> finalList = new List<Project>();
+          //  var packageList = new List<FundingPackage>();
+            
             backerpackages.ForEach(pack => finalList.Add(dbContext.Projects.Find(pack.Id)));
 
+          //  packageList.ForEach(pack => finalList.Add(dbContext.Projects.Find(pack.Id)));
+           
             //return dbContext.Projects
             //    .Where(backerpackage => backerpackage.Backer.Id.Equals(backerId))
             //    .Inculde(item)
