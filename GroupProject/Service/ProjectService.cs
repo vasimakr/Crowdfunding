@@ -1,5 +1,6 @@
 ﻿using Crowdfunding.dto;
 using Crowdfunding.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,20 +80,18 @@ namespace Crowdfunding.Service
                                      .ToList();
             if (existance.Count() == 0) return null;
 
-            var backerpackages = dbContext.BackerPackages
+            List<BackerPackage> backerpackages = dbContext.BackerPackages
                                           .Where(backerpackage => backerpackage.Backer.Id==backerId)
-                                          //.GroupBy(q => q.FundingPackage.Id)
-                                          //.Select(g => g.First())
-                                   //       .Skip((pageCount - 1) * pageSize)
-                                  //        .Take(pageSize)
+                                          .Include(item => item.FundingPackage)
                                           .ToList();
 
-            List<Project> finalList = new List<Project>();
-          //  var packageList = new List<FundingPackage>();
-            
-            backerpackages.ForEach(pack => finalList.Add(dbContext.Projects.Find(pack.Id)));
 
-          //  packageList.ForEach(pack => finalList.Add(dbContext.Projects.Find(pack.Id)));
+            List<Project> finalList = new List<Project>();
+            var packageList = new List<FundingPackage>();
+
+            backerpackages.ForEach(element => packageList.Add(dbContext.FundingPackages.Where(fp => fp.Id == element.FundingPackage.Id).Include(item => item.Project).First()));
+            //backerpackages.ForEach(pack => packageList.Add(dbContext.FundingPackages.Include(item => item.Project));
+            packageList.ForEach(pack => finalList.Add(dbContext.Projects.Find(pack.Project.Id)));
            
             //return dbContext.Projects
             //    .Where(backerpackage => backerpackage.Backer.Id.Equals(backerId))
