@@ -18,6 +18,7 @@ namespace Crowdfunding.Service
         public List<Project> ReadProject(int pageCount, int pageSize, int creatorId); //Reads projects by specific creator
         public List<Project> BReadProject(int pageCount, int pageSize, int backerId); //Reads projects by specific creator
         public bool CreateProject(Project project, Creator creator);
+        public Project UpdateStatus(int projectId, string update);
 
     }
 }

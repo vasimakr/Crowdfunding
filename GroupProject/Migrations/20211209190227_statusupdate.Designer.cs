@@ -4,14 +4,16 @@ using Crowdfunding.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Crowdfunding.Migrations
 {
     [DbContext(typeof(FundRaiserContext))]
-    partial class FundRaiserContextModelSnapshot : ModelSnapshot
+    [Migration("20211209190227_statusupdate")]
+    partial class statusupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

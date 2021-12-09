@@ -15,8 +15,7 @@ namespace Crowdfunding.Model
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        [NotMapped]
-        public List<string> StatusUpdate { get; set; } = new List<string>();
+        public string StatusUpdate { get; set; } 
         public Category Category { get; set; }
         public virtual List<FundingPackage> FundingPackages { get; set; }
         public bool IsTrending { get; set; }

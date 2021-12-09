@@ -17,23 +17,42 @@
             <th scope="col">TITLE</th>
             <th scope="col">DESCRIPTION</th>
             <th scope="col">GOAL</th>
-            <th scope="col">FUNDINGS</th>
+            <th scope="col">FUNDING</th>
         </tr>
     </thead>
     <tbody>
-
-        @foreach (var Package in Model.FundingPackages)
-        {
         <tr>
-            <td> @Package.Tier</td>
-            <td> @Package.Name </td>
-            <td> @Package.Description </td>
-            <td> @Package.Price </td>
-            <td> <a href="/backer/buypackage/@Package.Id" title="Buy"><b>Buy</b></a> </td>
-
+            <th scope="row">@Model.Project.Title</th>
+            <th> @Model.Project.Description</th>
+            <th>@Model.Project.Goal </th>
+            <th>@Model.Project.Fundings</th>
         </tr>
-        }
+
     </tbody>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tier</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var Package in Model.FundingPackages)
+            {
+            <tr>
+                <td> @Package.Tier</td>
+                <td> @Package.Name </td>
+                <td> @Package.Description </td>
+                <td> @Package.Price </td>
+                <td> <a href="/backer/buypackage/@Package.Id" title="Buy"><b>Buy</b></a> </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+   
 </table>
 
 <table class="table">
@@ -45,14 +64,14 @@
     </thead>
     <tbody>
 
-        @foreach (var Update in Model.Project.StatusUpdate)
-        {
+       
+        
             <tr>
-                <td> @Update</td>
+                <td> @Model.Project.StatusUpdate</td>
                 @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
                     <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
             </tr>
-        }
+        
     </tbody>
 </table>
 

@@ -97,7 +97,7 @@ namespace CrowdfundingMvc.Controllers
             var creator = context.Creators.Find(Startup.UserId);
 
             var img = projectImage.ProjectImageFile;
-            if (img!= null)
+            if (img != null)
             {
                 var uniqueFileName = GetUniqueFileName(img.FileName);
                 var Uploads = Path.Combine(hostEnvironment.ContentRootPath + "\\wwwroot", "images");
@@ -108,7 +108,7 @@ namespace CrowdfundingMvc.Controllers
             }
 
             projectService.CreateProject(project, creator);
-            
+
             Startup.ProjectId = project.Id;
             return RedirectToAction(nameof(CreateFundingPackage));
         }
@@ -117,7 +117,7 @@ namespace CrowdfundingMvc.Controllers
         {
             FundingPackage fP = projectImage.FundingPackage;
 
-            fundingPackageService.CreateFundingPackage(Startup.ProjectId,fP);
+            fundingPackageService.CreateFundingPackage(Startup.ProjectId, fP);
             return RedirectToAction("Index", "Creator");
         }
 
@@ -131,7 +131,12 @@ namespace CrowdfundingMvc.Controllers
 
 
         }
-
+        [HttpPost]
+        public IActionResult StatusUpdate([Bind("Id, StatusUpdate")] Project project)
+        {
+            projectService.UpdateStatus(project.Id, project.StatusUpdate);
+            return RedirectToAction("ProjectEdit", "Creator", project);
+        }
         [HttpGet]
         public IActionResult ProjectView(int id)
         {
