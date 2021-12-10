@@ -14,56 +14,64 @@
 
 <div class="form">
 
-    <div class="form">
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div>
+            Title
+        </div>
 
-        <form asp-area="" asp-controller="Project" asp-action="CreateFundingPackage">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Project.Title" class="control-label">Title</label>
-                <input asp-for="Project.Title" class="form-control" />
-                <span asp-validation-for="Project.Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Project.Description" class="control-label">Description</label>
-                <input asp-for="Project.Description" class="form-control" />
-                <span asp-validation-for="Project.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Project.Goal" class="control-label">Goal</label>
-                <input asp-for="Project.Goal" class="form-control" />
-                <span asp-validation-for="Project.Goal" class="text-danger"></span>
-            </div>
-            <div>
-                Category
-            </div>
+        <div>
+            <input asp-for="Project.Title" placeholder="Title" class="form-control" />
+            <span asp-validation-for="Project.Title" class="text-danger"></span>
+        </div>
 
-            <div>
-                <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<Category>())"></select>
-            </div>
-            <hr />
+        <br />
 
-            <div class="form-group">
-                <input type="submit" value="Finalize Project" class="btn btn-primary" />
-            </div>
+        <div>
+            Description
+        </div>
 
-        </form>
-    </div>
+        <div>
+            <input asp-for="Project.Description" placeholder="Description" class="form-control"/>
+            <span asp-validation-for="Project.Description" class="text-danger"></span>
+        </div>
+
+        <br />
+
+        <div>
+            Goal
+        </div>
+
+        <div>
+            <input asp-for="Project.Goal" placeholder="Goal" class="form-control" />
+            <span asp-validation-for="Project.Goal" class="text-danger"></span>
+        </div>
+
+        <br />
+
+        <div>
+            Category
+        </div>
+
+        <div>
+            <select asp-for="Project.Category" asp-items="@(Html.GetEnumSelectList<Category>())"></select>
+        </div>
 
 
 
+        <br />
+        <input type="hidden" asp-for="Project.Id" />
 
-    @*IMAGE KAI VIDEO OTAN MPOUN
+        <!--  IMAGE KAI VIDEO OTAN MPOUN
         <dl>
             <dt>
-                <label asp-for="ProjectImageFile"></label>
+                <label asp-for="ProjectImage"></label>
             </dt>
             <dd>
-                <input asp-for="ProjectImageFile" type="file">
-                <span asp-validation-for="ProjectImageFile"></span>
+                <input asp-for="ProjectImage" type="file">
+                <span asp-validation-for="ProjectImage"></span>
             </dd>
-        </dl>*@
-
-    @*<dl>
+        </dl>
+        <dl>
             <dt>
                 <label asp-for="ProjectVideo"></label>
             </dt>
@@ -71,11 +79,22 @@
                 <input asp-for="ProjectVideo" type="file">
                 <span asp-validation-for="ProjectVideo"></span>
             </dd>
-        </dl>*@
-</div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        </dl>
+        </div>
+            -->
+
+        <div class="form-group">
+            <input type="submit" value="Finalize Project" class="btn btn-primary" />
+        </div>
+
+    </form>
+    </div>
+    <div class="container">
+
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 
 
 
@@ -85,10 +104,10 @@
 
 
 
-<div class="container">
+    <div class="container">
 
-</div>
+    </div>
 
-<div class="container">
+    <div class="container">
 
-</div>
+    </div>
