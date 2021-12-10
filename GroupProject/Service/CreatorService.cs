@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crowdfunding.Service
 {
@@ -18,7 +16,7 @@ namespace Crowdfunding.Service
 
         public void CreateCreator(Creator creator)
         {
-            
+
             dbContext.Creators.Add(creator);
             try { dbContext.SaveChanges(); }
             catch { }
@@ -26,8 +24,6 @@ namespace Crowdfunding.Service
         }
         public Creator ReadCreator(int id)
         {
-
-            
             Creator creator = dbContext.Creators.Find(id);
 
             return creator;
@@ -39,7 +35,7 @@ namespace Crowdfunding.Service
             {
                 return test.First();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }

@@ -1,15 +1,10 @@
-﻿using Crowdfunding.Service;
+﻿using Crowdfunding.Model;
+using Crowdfunding.Service;
+using CrowdfundingMvc.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Crowdfunding.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CrowdfundingMvc.Models;
+using System.Collections.Generic;
 
 namespace CrowdfundingMvc.Controllers
 {
@@ -21,7 +16,7 @@ namespace CrowdfundingMvc.Controllers
         private readonly IFundingPackageService fundingPackageService;
 
         [ActivatorUtilitiesConstructor]
-        public BackerController( IBackerService backerService, IProjectService projectService,  IHostEnvironment hostEnvironment, IFundingPackageService fundingPackageService)
+        public BackerController(IBackerService backerService, IProjectService projectService, IHostEnvironment hostEnvironment, IFundingPackageService fundingPackageService)
         {
             this.backerService = backerService;
             this.projectService = projectService;
@@ -61,14 +56,14 @@ namespace CrowdfundingMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
+
         public IActionResult BackerCreate([Bind("Id,Username,FirstName,LastName,Email")] Backer backer)
         {
             if (ModelState.IsValid)
             {
                 backerService.CreateBacker(backer);
                 Startup.UserId = backer.Id;
-                return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
+                return RedirectToAction(nameof(Index));
             }
             return View(backer);
         }

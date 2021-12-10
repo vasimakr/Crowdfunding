@@ -1,10 +1,7 @@
 ﻿using Crowdfunding.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crowdfunding.Service
 {
@@ -25,23 +22,13 @@ namespace Crowdfunding.Service
             {
                 return null;
             }
-
-            //var fundingPackage = new FundingPackage
-            //{
-            //    Project = project,
-            //    Tier = aFundingPackage.Tier,
-            //    Name = aFundingPackage.Name,
-            //    Price = aFundingPackage.Price,
-            //    Description = aFundingPackage.Description
-            //};
-
             dbContext.FundingPackages.Add(aFundingPackage);
             aFundingPackage.Project = project;
             dbContext.SaveChanges();
             return aFundingPackage;
         }
 
-        public FundingPackage UpdateFundingPackage(int fundingPackageId, FundingPackage fundingPackage)
+        public FundingPackage UpdateFundingPackage(int fundingPackageId, FundingPackage fundingPackage) //Editing funding packages (not implemented)
         {
             var dbFundingPackage = dbContext.FundingPackages.Find(fundingPackageId);
 
@@ -66,15 +53,15 @@ namespace Crowdfunding.Service
         {
             Backer dbBacker = dbContext.Backers.Find(backerId);
             var dbFundingPackage = dbContext.FundingPackages
-                .Where(item=> item.Id==fundingPackageId).Include(item => item.Project).First();
+                .Where(item => item.Id == fundingPackageId).Include(item => item.Project).First();
 
-           
+
             var backerPackage = new BackerPackage
             {
                 Backer = dbBacker,
                 FundingPackage = dbFundingPackage
             };
-            var project= dbContext.Projects.Find(dbFundingPackage.Project.Id);
+            var project = dbContext.Projects.Find(dbFundingPackage.Project.Id);
             project.Fundings += dbFundingPackage.Price;
             if (project.Fundings > 0.4 * project.Goal) project.IsTrending = true;   //Sets project as trending if it reaches 40% of its goal.
             dbContext.BackerPackages.Add(backerPackage);
@@ -99,5 +86,5 @@ namespace Crowdfunding.Service
         {
             return dbContext.FundingPackages.Where(fp => fp.Project.Id.Equals(id)).ToList();
         }
-    } 
+    }
 }

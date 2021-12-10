@@ -51,8 +51,8 @@
                     <td> @Package.Name </td>
                     <td> @Package.Description </td>
                     <td> @Package.Price </td>
-                    @*<td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
-                        <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
+                         @*<td> <a href="/project/delete/@project.Id" title="delete"><b>X</b></a> </td>
+                        <td> <a href="/project/update/@project.Id" title="update"><b>V</b></a> </td>/*@
                 </tr>
             }
         </tbody>
@@ -67,15 +67,10 @@
             </tr>
         </thead>
         <tbody>
-
-
             <tr>
                 <td> @Model.Project.StatusUpdate</td>
 
             </tr>
-
-
-            @*   <a href="/project/statusupdate/@Model.Project.Id" title="Status Update"><b>Post a new status update!</b></a>*@
         </tbody>
 
     </table>

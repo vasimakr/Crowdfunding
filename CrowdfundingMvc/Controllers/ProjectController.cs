@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
-using Crowdfunding.Model;
+﻿using Crowdfunding.Model;
 using Crowdfunding.Service;
 using CrowdfundingMvc.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
-using Newtonsoft.Json;
 
 namespace CrowdfundingMvc.Controllers
 {
@@ -127,7 +124,7 @@ namespace CrowdfundingMvc.Controllers
             fundingPackageService.CreateFundingPackage(Startup.ProjectId, fP);
             return RedirectToAction("Index", "Creator");
         }
-        
+
         private string GetUniqueFileName(string fileName)
         {
             fileName = Path.GetFileName(fileName);
@@ -139,7 +136,7 @@ namespace CrowdfundingMvc.Controllers
         [HttpPost]
         public IActionResult Search(string search)
         {
-            var list= projectService.SearchProjects(search);
+            var list = projectService.SearchProjects(search);
             return View(list);
         }
         [HttpPost]

@@ -4,105 +4,102 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Crowdfunding.Service
 {
-    
 
-        public class BackerService : IBackerService
+
+    public class BackerService : IBackerService
+    {
+        private readonly FundRaiserContext dbContext;
+
+        public BackerService(FundRaiserContext adbContext)
         {
-            private readonly FundRaiserContext dbContext;
+            dbContext = adbContext;
+        }
 
-            public BackerService (FundRaiserContext adbContext)
+        public ApiResponse<Backer> CreateBacker(Backer backer)
+        {
+            if (backer == null)
             {
-                dbContext = adbContext;
+                return new ApiResponse<Backer>()
+                {
+                    Data = null,
+                    Description = "Backer inserted was null. Nothing saved",
+                    StatusCode = 301
+                };
             }
 
-            public ApiResponse<Backer> CreateBacker(Backer backer)
+            if (backer.Email == null)
             {
-                if (backer == null)
+                return new ApiResponse<Backer>()
                 {
-                    return new ApiResponse<Backer>()
-                    {
-                        Data = null,
-                        Description = "Backer inserted was null. Nothing saved",
-                        StatusCode  = 301
-                    };
+                    Data = null,
+                    Description = "Backer inserted had null Email. Nothing saved",
+                    StatusCode = 302
+                };
             }
 
-                if (backer.Email == null)
-                {
-                    return new ApiResponse<Backer>()
-                    {
-                        Data = null,
-                        Description = "Backer inserted had null Email. Nothing saved",
-                        StatusCode  = 302
-                    };
-                }
-
-                dbContext.Backers.Add(backer);
-                if (dbContext.SaveChanges() == 1)
-                {
-                    return new ApiResponse<Backer>() { Data = backer, Description = "ok", StatusCode = 0 };
-                }
-
-                return new ApiResponse<Backer>() { Data = null, Description = "Nothing saved", StatusCode = 399 };
-
-            }
-            public Backer ReadBacker(int id)
+            dbContext.Backers.Add(backer);
+            if (dbContext.SaveChanges() == 1)
             {
-                return dbContext.Backers.Find(id);
+                return new ApiResponse<Backer>() { Data = backer, Description = "ok", StatusCode = 0 };
             }
+
+            return new ApiResponse<Backer>() { Data = null, Description = "Nothing saved", StatusCode = 399 };
+
+        }
+        public Backer ReadBacker(int id)
+        {
+            return dbContext.Backers.Find(id);
+        }
 
         public Backer ReadBacker(string username)
         {
-            var test = dbContext.Backers.Where(aBacker => aBacker.Username.Equals(username));
-            var test2 = test.First();
+            var list = dbContext.Backers.Where(aBacker => aBacker.Username.Equals(username));
             try
             {
-                return test2;
+                return list.First();
             }
-            catch(Exception e)
+            catch (Exception)
             {
                 return null;
             }
         }
 
         public List<Backer> ReadBacker()
-            {
-                return dbContext.Backers.ToList();
-            }
+        {
+            return dbContext.Backers.ToList();
+        }
 
-            public Backer UpdateBacker( int backerId, Backer backer)
-            {
-                var dbBacker = dbContext.Backers.Find(backerId);
-                if (dbBacker == null) throw new KeyNotFoundException();
-                dbBacker.Email = backer.Email;
-                dbBacker.Username = backer.Username;
-                dbBacker.FirstName = backer.FirstName;
-                dbBacker.LastName = backer.LastName;
-                dbContext.SaveChanges();
-                return dbBacker;
-            }
+        public Backer UpdateBacker(int backerId, Backer backer)
+        {
+            var dbBacker = dbContext.Backers.Find(backerId);
+            if (dbBacker == null) throw new KeyNotFoundException();
+            dbBacker.Email = backer.Email;
+            dbBacker.Username = backer.Username;
+            dbBacker.FirstName = backer.FirstName;
+            dbBacker.LastName = backer.LastName;
+            dbContext.SaveChanges();
+            return dbBacker;
+        }
 
-            public bool DeleteBacker( int backerId)
-            {
-                var dbBacker = dbContext.Backers.Find(backerId);
-                if (dbBacker == null) return false;
-                dbContext.Remove(dbBacker);
-                return dbContext.SaveChanges() == 1;
-            }
+        public bool DeleteBacker(int backerId)
+        {
+            var dbBacker = dbContext.Backers.Find(backerId);
+            if (dbBacker == null) return false;
+            dbContext.Remove(dbBacker);
+            return dbContext.SaveChanges() == 1;
+        }
 
-            public List<BackerPackage> GetBackerFundingPackages(int backerId)
-            {
-                return dbContext
-                       .BackerPackages
-                       .Where(item => item.Backer.Id == backerId)
-                       .Include(item => item.FundingPackage)
-                       .ToList();
-            }
+        public List<BackerPackage> GetBackerFundingPackages(int backerId)
+        {
+            return dbContext
+                   .BackerPackages
+                   .Where(item => item.Backer.Id == backerId)
+                   .Include(item => item.FundingPackage)
+                   .ToList();
         }
     }
+}
 

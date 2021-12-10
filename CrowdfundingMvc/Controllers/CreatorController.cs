@@ -59,16 +59,12 @@ namespace CrowdfundingMvc.Controllers
             {
                 creatorService.CreateCreator(creator);
                 Startup.UserId = creator.Id;
-                return RedirectToAction(nameof(Index)); // mporei na 8elei diaforetiko index (DLD KAINOURGIO IActionResult Index2 px)  edw h ftiaxnoume kainourgio controller User
+                return RedirectToAction(nameof(Index)); 
             }
             return View(creator);
         }
 
-        //GET Creator/ProjectEdit
-     //  public IActionResult ProjectEdit()
-     //  {
-     //      return View();
-     //  }
+
         [HttpGet]
         public IActionResult ProjectEdit(int id)
         {

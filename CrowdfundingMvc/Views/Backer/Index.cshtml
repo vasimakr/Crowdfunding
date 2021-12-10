@@ -6,47 +6,7 @@
 }
 @model List<Crowdfunding.Model.Project>
 
-<head>
-    @*<meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        * {
-            box-sizing: border-box;
-        }
 
-        #myInput {
-            background-image: url('/css/searchicon.png');
-            background-position: 10px 12px;
-            background-repeat: no-repeat;
-            width: 100%;
-            font-size: 9px;
-            letter-spacing: 2px;
-            padding: 12px 20px 12px 40px;
-            border: 0px solid #ddd;
-            margin-bottom: 12px;
-        }
-
-        #myUL {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-            #myUL li a {
-                border: 1px solid #ddd;
-                margin-top: -1px; /* Prevent double borders */
-                background-color: #f6f6f6;
-                padding: 12px;
-                text-decoration: none;
-                font-size: 11px;
-                color: black;
-                display: block
-            }
-
-                #myUL li a:hover:not(.header) {
-                    background-color: #eee;
-                }
-    </style>*@
-</head>
 <body>
 
     
@@ -72,12 +32,13 @@
                 <th>Description</th>
                <th>image</th>
                @*<th>video</th>-->*@
-              @*  <th>Funding</th>*@
+                <th>Funding</th>
                 <th>Category</th>
             </tr>
         </thead>
 
             <h3>Funded Projects</h3>
+        <tbody>
             @foreach (var project in Model ?? Enumerable.Empty<Crowdfunding.Model.Project>())
             {
                 <tr>
@@ -89,39 +50,20 @@
 
                         @if (project.Description != null)
                         {
-                            <img src="/images/@project.Description" title="Project image" width="100px" height="100px" />
+                            <img src="/images/@project.Description" title="Project image" width="100" height="100" />
                         }
 
 
 
                     </td>
-                   @* <td> @project.Fundings </td>*@
+                     <td>@project.Fundings </td>
                     <td> @project.Category </td>
-                    @*/ <td> <a href="/product/delete/@project.Id" title="delete"><b>X</b></a> </td>
-                    <td> <a href="/product/update/@project.Id" title="update"><b>V</b></a> </td>/*@
                 </tr>
             }
         </tbody>
     </table>
 
-    @*<script>
-        function myFunction() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            ul = document.getElementById("myUL");
-            li = ul.getElementsByTagName("li");
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("a")[0];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = "";
-                } else {
-                    li[i].style.display = "none";
-                }
-            }
-        }
-    </script>*@
+ 
 
  <div class="container">
 

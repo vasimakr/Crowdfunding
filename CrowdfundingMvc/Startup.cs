@@ -2,21 +2,17 @@ using Crowdfunding.Model;
 using Crowdfunding.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CrowdfundingMvc
 {
     public class Startup
     {
-        public static int UserId = 0;
-        public static int ProjectId = 0;
+
+        public static int UserId = 0; //Carries the Id of the current user throught the session
+        public static int ProjectId = 0; //Carries the Id of the relevant project
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -29,9 +25,9 @@ namespace CrowdfundingMvc
         {
             services.AddControllersWithViews();
             services.AddScoped<IProjectService, ProjectService>();
-            services.AddScoped<IBackerService , BackerService>();
+            services.AddScoped<IBackerService, BackerService>();
             services.AddScoped<ICreatorService, CreatorService>();
-            services.AddScoped<IFundingPackageService , FundingPackageService>();
+            services.AddScoped<IFundingPackageService, FundingPackageService>();
             services.AddDbContext<FundRaiserContext>();
         }
 
