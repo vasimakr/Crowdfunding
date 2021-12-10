@@ -48,9 +48,9 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult SignInB([Bind("Username")] Backer backer)
         {
             var userBacker = backerService.ReadBacker(backer.Username);
+            if (userBacker == null) return RedirectToAction(nameof(SignInB));
             Startup.UserId = userBacker.Id;
             return RedirectToAction(nameof(Index));
-
         }
 
         [ActivatorUtilitiesConstructor]

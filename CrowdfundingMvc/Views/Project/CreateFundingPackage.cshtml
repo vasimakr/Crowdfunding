@@ -7,66 +7,43 @@
 
 @using Crowdfunding.Model
 @model ProjectImage
-
+@Html.ValidationMessageFor(m => m.FundingPackage.Tier, "", new { @class = "text-danger" })
+@Html.ValidationMessageFor(m => m.FundingPackage.Name, "", new { @class = "text-danger" })
+@Html.ValidationMessageFor(m => m.FundingPackage.Price, "", new { @class = "text-danger" })
 <div class="form">
 
-<form asp-action="CreateFundingPackage" enctype="multipart/form-data">
-    <input type="hidden" asp-for="Project.Id" />
-    <div>
-        Tier
-    </div>
-    <div>
-        <input asp-for="FundingPackage.Tier" placeholder="Tier" />
-    </div>
-    <div>
-        Description
-    </div>
-    <div>
-        <input asp-for="FundingPackage.Description" placeholder="Description" />
-    </div>
-    <div>
-        Price
-    </div>
-    <div>
-        <input asp-for="FundingPackage.Price" placeholder="Price" />
-    </div>
-    <div>
-        Name
-    </div>
-    <div>
-        <input asp-for="FundingPackage.Name" placeholder="Name" />
-    </div>
-
-    <!--  IMAGE KAI VIDEO OTAN MPOUN
-    <dl>
-        <dt>
-            <label asp-for="ProjectImage"></label>
-        </dt>
-        <dd>
-            <input asp-for="ProjectImage" type="file">
-            <span asp-validation-for="ProjectImage"></span>
-        </dd>
-    </dl>
-
-    <dl>
-        <dt>
-            <label asp-for="ProjectVideo"></label>
-        </dt>
-        <dd>
-            <input asp-for="ProjectVideo" type="file">
-            <span asp-validation-for="ProjectVideo"></span>
-        </dd>
-    </dl>
-        -->
+    <form asp-area="" asp-controller="Project" asp-action="CreateFundingPackage">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="FundingPackage.Tier" class="control-label">Tier</label>
+            <input asp-for="FundingPackage.Tier" class="form-control" />
+            <span asp-validation-for="FundingPackage.Tier" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FundingPackage.Name" class="control-label">Name</label>
+            <input asp-for="FundingPackage.Name" class="form-control" />
+            <span asp-validation-for="FundingPackage.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FundingPackage.Description" class="control-label">Description</label>
+            <input asp-for="FundingPackage.Description" class="form-control" />
+            <span asp-validation-for="FundingPackage.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FundingPackage.Price" class="control-label">Price</label>
+            <input asp-for="FundingPackage.Price" class="form-control" />
+            <span asp-validation-for="FundingPackage.Price" class="text-danger"></span>
+        </div>
 
 
-    <hr /> 
+     
+        <hr />
 
-    <div class="form-group">
-        <input type="submit" value="Create Funding Tier" class="btn btn-primary" />
-    </div>
+        <div class="form-group">
+            <input type="submit" value="Create Funding Tier" class="btn btn-primary" />
+        </div>
 
-</form>
+    </form>
 </div>
 
 <div class="container">
@@ -76,3 +53,6 @@
 <div class="container">
 
 </div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

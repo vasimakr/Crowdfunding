@@ -60,7 +60,14 @@ namespace Crowdfunding.Service
         {
             var test = dbContext.Backers.Where(aBacker => aBacker.Username.Equals(username));
             var test2 = test.First();
-            return test2;
+            try
+            {
+                return test2;
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
 
         public List<Backer> ReadBacker()

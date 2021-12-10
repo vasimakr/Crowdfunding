@@ -40,8 +40,9 @@ namespace CrowdfundingMvc.Controllers
         public IActionResult SignInC([Bind("Username")] Creator creator)
         {
             var userCreator = creatorService.ReadCreator(creator.Username);
-            Startup.UserId = userCreator.Id;
             
+            if (userCreator == null) return RedirectToAction(nameof(SignInC));
+            Startup.UserId = userCreator.Id;
             return RedirectToAction(nameof(Index));
         }
         [ActivatorUtilitiesConstructor]

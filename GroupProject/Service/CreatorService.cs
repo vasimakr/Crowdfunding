@@ -35,7 +35,14 @@ namespace Crowdfunding.Service
         public Creator ReadCreator(string username)
         {
             var test = dbContext.Creators.Where(aCreator => aCreator.Username.Equals(username));
-            return test.First();
+            try
+            {
+                return test.First();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public List<Creator> ReadCreator()
