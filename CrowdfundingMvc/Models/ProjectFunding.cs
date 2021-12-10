@@ -9,6 +9,7 @@ namespace CrowdfundingMvc.Models
     public class ProjectFunding
     {
         public Project Project { get; set; }
+        public FundingPackage FundingPackage { get; set; }
         public List<FundingPackage> FundingPackages { get; set; }
     }
 }

@@ -24,7 +24,7 @@
                 <th> @Model.Project.Description</th>
                 <th>@Model.Project.Goal </th>
                 <th>@Model.Project.Fundings</th>
-                <th>@(Math.Round((decimal)Model.Project.Fundings/Model.Project.Goal*100))%</th>
+                <th>@(Math.Round((decimal)Model.Project.Fundings / Model.Project.Goal * 100))%</th>
             </tr>
 
         </tbody>
@@ -57,7 +57,8 @@
             }
         </tbody>
     </table>
-    <a href="/project/createfundingpackage/@Model.Project" title="Add Funding Package"><b>Add Funding Package</b></a>
+    <p hidden>@(Startup.ProjectId = Model.Project.Id)</p>
+    <a href="/project/createfundingpackage" title="Add Funding Package"><b>Add Funding Package</b></a>
     <table class="table">
         <thead>
             <tr>

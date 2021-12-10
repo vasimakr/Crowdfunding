@@ -125,7 +125,7 @@ namespace CrowdfundingMvc.Controllers
         {
             FundingPackage fP = projectImage.FundingPackage;
             fundingPackageService.CreateFundingPackage(Startup.ProjectId, fP);
-            return RedirectToAction("ProjectEdit", "Creator");
+            return RedirectToAction("Index", "Creator");
         }
         
         private string GetUniqueFileName(string fileName)
