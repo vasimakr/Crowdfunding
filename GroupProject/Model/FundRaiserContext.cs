@@ -19,7 +19,7 @@ namespace Crowdfunding.Model
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = tcp:crowdfunding-team3.database.windows.net,1433; Initial Catalog = crowdfunding - team3db; Persist Security Info = False; User ID= team3; Password =Cloud1234!@#$; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30");
+            optionsBuilder.UseSqlServer("Server = tcp:crowdfunding-team3.database.windows.net,1433; Initial Catalog = crowdfunding - team3db; Persist Security Info = False; User ID= team3; Password ={Your Password}; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30");
            
             // optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;Integrated Security=True");
             // optionsBuilder.UseSqlServer("Data Source=localhost;Initial Catalog=Crowdfunding;User =sa;Password=admin!@#123");  //works for Vasili
